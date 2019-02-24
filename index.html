@@ -6,30 +6,161 @@
     <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style media="screen">
-    body, html {
-      height: 100%;
-      margin: 0;
+    html {
+          min-height: 100%;
     }
     .pimg1{
-      background-image:url(img/landing.jpg);
+      background-image:url(img/blue.jpg);
       height:100%;
-      opacity: 0.6;
       height: 100vh;
       background-attachment:scroll;
     }
-    .ptext h3{
+    .tittlez{
+      text-align: center;
+    }
+    .pimg1 {
+    position: relative;
+    }
+    .ptext {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .ptext h3, p{
       color: #000000;
     }
+
+    #repos{
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .line {
+          position: relative;
+          top: 50%;
+          width: 16em;
+          margin: 0 auto;
+          border-right: 2px solid rgba(255, 255, 255, 0.75);
+          font-size: 180%;
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden;transform: translateY(-50%);
+    }
+
+    /*Animation*/
+
+    .anim-typewriter {
+          animation: typewriter 4s steps(40) 1s 1 normal both,
+          blinkTextCursor 500ms steps(40) infinite normal;
+    }
+
+    @keyframes typewriter {
+          from {
+                width: 0;
+          }
+          to {
+                width: 16em;
+          }
+    }
+
+    @keyframes blinkTextCursor {
+          from {
+                border-right-color: rgba(255, 255, 255, 0.75);
+          }
+          to {
+                border-right-color: transparent;
+          }
+    }
+
     </style>
   </head>
   <body>
     <div class="pimg1">
        <div class="ptext">
          <h3>João Maria Janeiro</h3>
+         <p></p>
+         <p class="line anim-typewriter">Passionate programmer.</p>
        </div>
      </div>
 
+     <div class="container">
+       <div class="tittlez">
+         <br>
+         <h2>Internship Projects</h2>
+         <br>
+       </div>
+      <div class="row">
+        <div class="card-deck">
+          <div class="card" style="width: 18rem;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/2000px-SAP_2011_logo.svg.png" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">SAP Internship</h5>
+              <p class="card-text">E-Commerce web development summer intership at SAP Portugal.</p>
+              <hr>
+              <p class="card-text">Technologies Used: Java, Spring Boot</p>
+              <p class="card-text">Duration: One Month</p>
+              <p class="card-text">First Year Of Bachelor</p>
+              <p class="card-text">Mentor:<a href="https://www.linkedin.com/in/christianborges/"> Christian Franco</a></p>
+              <a href="https://github.com/Joao-Maria-Janeiro/SpringBootBackend" class="btn btn-primary">Check Project</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
+      <div class="tittlez">
+        <br>
+        <h2>Professional Projects</h2>
+        <br>
+      </div>
+      <div class="row">
+        <div class="card-deck">
+          <div class="card" style="width: 18rem;">
+            <img src="https://raw.githubusercontent.com/Joao-Maria-Janeiro/SaoPerolasDjango/master/accounts/static/img/logo.png" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">São Perolas Website</h5>
+              <p class="card-text">E-Commerce website.</p>
+              <hr>
+              <p class="card-text">Technologies Used: Django, Stripe Payments.</p>
+              <a href="https://github.com/Joao-Maria-Janeiro/SaoPerolasDjango" class="btn btn-primary">Check Project</a>
+            </div>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <img src="https://raw.githubusercontent.com/Joao-Maria-Janeiro/Portfolio-Website/master/favicons/android-chrome-512x512.png" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">Leopoldo Gonçalves Portfolio</h5>
+              <p class="card-text">Static Personal Portfolio for the designer Leopoldo Gonçalves.</p>
+              <hr>
+              <p class="card-text">Technologies Used: HTML, CSS, JavaScript, Bootstrap.</p>
+              <a href="https://github.com/Joao-Maria-Janeiro/Portfolio-Website" class="btn btn-primary">Check Project</a>
+            </div>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <img src="https://raw.githubusercontent.com/Joao-Maria-Janeiro/Cook-My-Leftovers/master/images/logo.png" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">Cook My Leftovers</h5>
+              <p class="card-text">Mobile App that let's users search for recipes with the ingredients they have.</p>
+              <hr>
+              <p class="card-text">Technologies Used: Flutter.</p>
+              <a href="https://divestartup.ml/" class="btn btn-primary">Check Project</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="tittlez">
+        <br>
+        <h2>All Projects</h2>
+        <br>
+      </div>
       <div class="row" id="repos">
       </div>
     </div>
