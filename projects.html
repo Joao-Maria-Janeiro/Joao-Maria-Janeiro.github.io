@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+    <style media="screen">
+    html {
+          min-height: 100%;
+    }
+    .pimg1{
+      background-image:url(img/landing.jpg);
+      width: 100%;
+      height: 200px;
+    }
+    .tittlez{
+      text-align: center;
+    }
+    .pimg1 {
+    position: relative;
+    }
+    .ptext {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .ptext h3, p{
+      color: #000000;
+    }
+
+    #repos{
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .line {
+          position: relative;
+          top: 50%;
+          width: 16em;
+          margin: 0 auto;
+          border-right: 2px solid rgba(255, 255, 255, 0.75);
+          font-size: 180%;
+          text-align: center;
+          white-space: nowrap;
+          overflow: hidden;transform: translateY(-50%);
+    }
+
+    .topz{
+      margin-top: 100px;
+    }
+
+    @media screen and (max-width: 960px) {
+      .first {
+        margin-top: 200px;
+      }
+      .topz{
+        margin-top: 0px;
+      }
+      .topz img{
+        margin-top: 100px;
+      }
+      .card{
+        margin-left: 50px;
+      }
+    }
+
+
+    </style>
+  </head>
+  <body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="index.html">
+        <img class="rounded-circle" src="./img/profile.jpg" width="40" height="40" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="projects.html">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="experiences.html">Experiences</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Writings</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container first">
+      <div class="tittlez">
+        <br>
+        <h2>Internships</h2>
+        <br>
+      </div>
+
+     <div class="row">
+       <div class="card-deck">
+         <div class="card" style="width: 18rem;">
+           <img src="https://www.trainingtoyou.com/wp-content/uploads/2018/08/2000px-Google__G__Logo.svg_.png" class="card-img-top">
+           <div class="card-body">
+             <h5 class="card-title">Google Internship</h5>
+             <p class="card-text">Google Ads summer intership at Google New York.</p>
+             <hr>
+             <p class="card-text">Languages Used: Java, Dart</p>
+             <p class="card-text">Duration: Three Months</p>
+             <p class="card-text">Second Year Of Bachelor</p>
+             <p class="card-text">Mentor:<a href="https://www.linkedin.com/in/ericduran/"> Eric Duran </a></p>
+           </div>
+         </div>
+         <div class="card" style="width: 18rem;">
+           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/SAP_2011_logo.svg/2000px-SAP_2011_logo.svg.png" class="card-img-top">
+           <div class="card-body">
+             <h5 class="card-title">SAP Internship</h5>
+             <p class="card-text">E-Commerce web development summer intership at SAP Portugal.</p>
+             <hr>
+             <p class="card-text">Technologies Used: Java, Spring Boot</p>
+             <p class="card-text">Duration: One Month</p>
+             <p class="card-text">First Year Of Bachelor</p>
+             <p class="card-text">Mentor:<a href="https://www.linkedin.com/in/christianborges/"> Christian Franco</a></p>
+             <a href="https://github.com/Joao-Maria-Janeiro/SpringBootBackend" class="btn btn-primary">Check Project</a>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <div class="container">
+     <div class="tittlez">
+       <br>
+       <h2>Professional Projects</h2>
+       <br>
+     </div>
+     <div class="row">
+       <div class="card-deck">
+         <div class="card" style="width: 18rem;">
+           <img src="https://raw.githubusercontent.com/Joao-Maria-Janeiro/SaoPerolasDjango/master/static/img/logo.png" class="card-img-top">
+           <div class="card-body">
+             <h5 class="card-title">São Perolas Website</h5>
+             <p class="card-text">E-Commerce website.</p>
+             <hr>
+             <p class="card-text">Technologies Used: Django, Stripe Payments.</p>
+             <a href="https://github.com/Joao-Maria-Janeiro/SaoPerolasDjango" class="btn btn-primary">Check Project</a>
+           </div>
+         </div>
+
+         <div class="card" style="width: 18rem;">
+           <img src="https://raw.githubusercontent.com/Joao-Maria-Janeiro/Portfolio-Website/master/favicons/android-chrome-512x512.png" class="card-img-top">
+           <div class="card-body">
+             <h5 class="card-title">Leopoldo Gonçalves Portfolio</h5>
+             <p class="card-text">Static Personal Portfolio for the designer Leopoldo Gonçalves.</p>
+             <hr>
+             <p class="card-text">Technologies Used: HTML, CSS, JavaScript, Bootstrap.</p>
+             <a href="https://github.com/Joao-Maria-Janeiro/Portfolio-Website" class="btn btn-primary">Check Project</a>
+           </div>
+         </div>
+
+         <div class="card" style="width: 18rem;">
+           <img src="https://raw.githubusercontent.com/Joao-Maria-Janeiro/Cook-My-Leftovers/master/images/logo.png" class="card-img-top">
+           <div class="card-body">
+             <h5 class="card-title">Cook My Leftovers</h5>
+             <p class="card-text">Mobile App that let's users search for recipes with the ingredients they have.</p>
+             <hr>
+             <p class="card-text">Technologies Used: Flutter.</p>
+             <a href="https://divestartup.ml/" class="btn btn-primary">Check Project</a>
+           </div>
+         </div>
+
+       </div>
+     </div>
+   </div>
+
+   <div class="container">
+     <div class="tittlez">
+       <br>
+       <h2>All Projects</h2>
+       <br>
+     </div>
+     <div class="row" id="repos">
+     </div>
+   </div>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   <script type="text/javascript">
+   $(document).ready( function() {
+   $.ajax({
+     type: 'GET',
+     url: "https://api.github.com/users/Joao-Maria-Janeiro/repos",
+     dataType: 'json',
+     success: function(response){
+       for (var i = 0; i < response.length; i++) {
+         var info = "<div class=\"card\" id=\"repo\" style=\"width: 15rem;\">";
+         if((response[i]["language"]).toLowerCase() == "python" || (response[i]["language"]).toLowerCase() == "java" || (response[i]["language"]).toLowerCase() == "c"){
+           info += "<img class=\"card-img-top\"><i style=\"font-size: 15em;\" class=\"devicon-" + (response[i]["language"]).toLowerCase() + "-plain\"></i></img>";
+         }else if ((response[i]["language"]).toLowerCase() == "html") {
+           info += "<img class=\"card-img-top\"><i style=\"font-size: 15em;\" class=\"devicon-" + (response[i]["language"]).toLowerCase() + "5-plain\"></i></img>";
+         }else{
+           info += "<img width=\"80\" class=\"card-img-top\" src=\"https://image.flaticon.com/icons/png/512/25/25231.png\">";
+         }
+         info += "<div class=\"card-body\">";
+         info += "<h5 class=\"card-title\">" + response[i]["name"] + "</h5>";
+         info += "<p class=\"card-text\">" + response[i]["description"] + "</p>";
+         info += "<p class=\"card-text\">Main Language: " + response[i]["language"] + "</p>";
+         info += "<a href=" + '"' + response[i]["html_url"] + '"' + " class=\"btn btn-primary\">Check Project</a>";
+         info += "<p class=\"card-text\"><small class=\"text-muted\">Created at: " + response[i]["created_at"] + "</small></p>";
+         info += "</div></div>";
+
+         document.getElementById('repos').insertAdjacentHTML('beforeend', info);
+
+       }
+     },
+     error: function(rs, e){
+       console.log(rs.responseText);
+     }
+   });
+   });
+   </script>
+  </body>
+</html>
