@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="index.html">
+        <img class="rounded-circle" src="./img/profile.jpg" width="40" height="40" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="projects.html">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="experiences.html">Experiences</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="writings.html">Writings</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+<br><br>
+<div class="container">
+  <h1 style="text-align:center;" >Explaining the project</h1>
+  <p>The project is made up of six challenges. All the challenges consist of finding paths in a map (which is represented by a matrix witha cost at each cell). It's important to note that we can only move in adjacent steps so 8 options per cell (up, down, left, right and the corners).</p>
+  <p>In order to simplify the data manipulation I created a Map structure (definition up next) which stores all the data given in the input (besides the actual map).</p>
+  <script src="https://gist.github.com/Joao-Maria-Janeiro/1137807f5e64b377aa60973db94b6b9f.js"></script>
+
+  <h2 style="text-align:center;">The challenges</h2>
+  <h4>Variant A</h4>
+  <p>Given a starting point, x0, find a path with exactly k steps so that the cells are visited in ascending order of their values, or indicate the path does not exist.</p>
+
+  <h4>How did I go about solving this?</h4>
+  <p>To approach this problem it was obvious that we had to use a graph search algorithm. Now all that was left was to figure out if the best one was DFS or BFS. Evaluating the given description for the variant I thought that if I applied a BFS it would take a lot longer to find what we want because we would do a lot of unecessary work and try to see too many paths at once while if we used the DFS we would check path by path checking if each cell has a bigger value than the previous one and, if so, we would keep on this path until one of two options, we found a path with k steps (in this case the path was found and we only had to save it and exit the fucntion) or this cell has a smaller value then the previous one which in this case we would discard this cell and try the next one. </p>
+
+  <script src="https://gist.github.com/Joao-Maria-Janeiro/197ecf96bbf3cbea0d31a89c6a6f0fb4.js"></script>
+
+  <p>In order to actually solve this problem I had to choose a stoping condition for the recursion. So the logical one was when the number of steps was equal to k, if that happens, we set the "found" flag to 1 so we can then store the path in the array. In order to get the adjacencies of each cell I simply call the get_adjacent function which return an array of type "Point" (definition up next) with those adjacencies.</p>
+  <script src="https://gist.github.com/Joao-Maria-Janeiro/f5af3abffcc56406bf688e876734aeee.js"></script>
+  <p>Then we iterate throufh all the adjacencies of the cuurent cell and check if an adjacency is bigger than the current cell, if so we go to it and check its adjacencies and so on, creating a path.</p>
+  <p>Without the break in the if statement the code was writing a lot of unnecessary work so after some thought I realised that we had to break on each point because we don't to iterate to any more adjacencies we just want the points we passed by on the path.</p>
+</div>
+
+
+<footer> <center>
+  <a style="color:gray;" href="https://github.com/Joao-Maria-Janeiro"><i style="font-size: 1.6em;" class="fab fa-github"></i></a>
+  <a style="color:gray;" href="https://www.linkedin.com/in/joaomariajaneiro/"><i style="font-size: 1.6em;" class="fab fa-linkedin"></i></a>
+</center></footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+  </body>
+</html>
