@@ -98,7 +98,7 @@
     </p>
     
     <h3 style="text-align:center;">How do I generate this user?</h3>
-    <p>This anonymous user is created with a randomly generated string as its username and email (this makes the chances of having an error due to repeated usernames quite small, even less because users are deleted every 2h). In the user model I simply added an anonymous_user boolean field so I know if the user is anonymous and everything else is the same as a regular user. </p>
+    <p>This anonymous user is created with a randomly generated string as its username and email (this makes the chances of having an error due to repeated usernames quite small, even less because users are deleted every 2h). In the user model I simply added an anonymous_user boolean field so I know if the user is anonymous and its set to True in this users and to False on regular users. </p>
 
     <h3 style="text-align:center;">Conclusions</h3>
     <p>As I see it using a regular user, setting its anonymous_user flag to True and restrict its access is the simplest and cleanest way. It’s probably not the prettiest but it works well enough.</p>
