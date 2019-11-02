@@ -136,13 +136,13 @@
     <p>Sentence 1: AI is our friend and it has been friendly</p>
     <p>Sentence 2: AI and humans have always been friendly</p>
 
-    <p>In order to calculate the similarity using the Jacard method, first we perform lemmeatization to get all to the words to their root word. Like "friend" and "friendly" will both become "friend".
+    <p>In order to calculate the similarity using the Jacard method, first we perform lemmatization to get all to the words to their root word. Like "friend" and "friendly" will both become "friend".
     Let's look at the Venn diagram(taken from towardsdatascience):
     <div class="">
       <img src="https://miro.medium.com/max/602/1*u2ZZPh5er5YbmOg7k-s0-A.png" alt="" /></p>
     </div>
 
-    <p>So for this internsection we get a Jaccard Similarity of 5/(5+3+2) = 0.5, which is the intersection size over the total amount of words.</p>
+    <p>So for this intersection we get a Jaccard Similarity of 5/(5+3+2) = 0.5, which is the intersection size over the total amount of words.</p>
 
     <h5 id="cosinesimilarity">Cosine Similarity</h5>
 
@@ -157,7 +157,7 @@
     <p>Sentence 1: AI is our friend and it has been friendly</p>
     <p>Sentence 2: AI and humans have always been friendly</p>
 
-    <p><strong>First</strong>, we get the Term Frequeccy using a bag of words:</p>
+    <p><strong>First</strong>, we get the Term Frequency using a bag of words:</p>
 
     <table style="width:100%">
       <tr>
@@ -174,7 +174,7 @@
         <th>HAS</th>
       </tr>
       <tr>
-        <td>Sentece 1</td>
+        <td>Sentence 1</td>
         <td>1</td>
         <td>1</td>
         <td>2</td>
@@ -187,7 +187,7 @@
         <td>1</td>
       </tr>
       <tr>
-        <td>Sentece 2</td>
+        <td>Sentence 2</td>
         <td>1</td>
         <td>0</td>
         <td>1</td>
@@ -205,7 +205,7 @@
 
     <p><strong>Second</strong>, knowing that the main issue with term frequency counts is that it favours the longer sentences, in order to solve this we must normalize the frequencies, with their respective magnitudes. Summing up squares of each frequency and taking a square root.</p>
 
-    <p><strong>Third</strong>, as we already have the nomralized the two vectors to have a length of 1 we can calculate the cosine similarity by using the dot product.</p>
+    <p><strong>Third</strong>, as we already have the normalized the two vectors to have a length of 1 we can calculate the cosine similarity by using the dot product.</p>
 
     <h5 id="differencesbetweenmethods">Differences between methods</h5>
 
@@ -229,7 +229,7 @@
 
     <h2 id="thecode">The Code</h2>
 
-    <p>I'll higlight the important parts here, to check the full code see the GitHub repo.</p>
+    <p>I'll highlight the important parts here, to check the full code see the GitHub repo.</p>
 
     <p>Reading from the file:</p>
 
@@ -297,7 +297,7 @@
 
     <li>The Departed</li>
 
-    <li>One flew Over the Curf</li>
+    <li>One flew over the cuckoo's nest</li>
 
     <li>Inception</li>
 
@@ -309,7 +309,7 @@
 
     <li>Catch Me if You Can</li>
 
-    <li>Gangs of New Yotk</li>
+    <li>Gangs of New York</li>
 
     <li>The Aviator</li>
 
@@ -318,14 +318,14 @@
     <li>The Prestige</li>
     </ul>
 
-    <p>We can say our resuts are not too bad considering our dataset is quite small, the matching ones are selected in bold.</p>
+    <p>We can say our results are not too bad considering our dataset is quite small, the matching ones are selected in bold.</p>
 
     <p>The results for some movies are quite bad if we compare it to Google's suggestions. Central Intelligence for instance has none of the 5 our program gives.</p>
 
     <h2 id="whatcouldbebetter">What could be better</h2>
 
     <p>So the results are not bad but could be improved, how?
-    First they'd be much better if the dataset was bigger and there were more movies to choose from. We split the words and compare them but some coupling of words should be compared as pairs or tripplets, like the actors names for instance, if we see Leonardo DiCaprio we will match it to other Leonardos and other DiCaprios, this is not a very common first or last name but with some other names that are more common this is an issue.</p>
+    First they'd be much better if the dataset was bigger and there were more movies to choose from. We split the words and compare them but some coupling of words should be compared as pairs or triplets, like the actors names for instance, if we see Leonardo DiCaprio we will match it to other Leonardos and other DiCaprios, this is not a very common first or last name but with some other names that are more common this is an issue.</p>
 
     <p>We could also do a different approach using Neural Networks that might find some different relations between the movies.</p>
 
