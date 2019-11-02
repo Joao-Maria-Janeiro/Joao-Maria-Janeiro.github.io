@@ -159,10 +159,47 @@
 
     <p><strong>First</strong>, we get the Term Frequeccy using a bag of words:</p>
 
-    <p>| Sentence | AI | IS | FRIEND | HUMAN | ALWAYS | AND | BEEN | OUR | IT | HAS |
-    |----------|:---|:---|:-------|-------|--------|-----|------|-----|----|----:|
-    | Sentece 1| 1 | 1 | 2 | 0 | 0 | 1 | 1 | 1 | 1 | 1 |
-    | Sentece 2| 1 | 0 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 |</p>
+    <table style="width:100%">
+      <tr>
+        <th>Sentence</th>
+        <th>AI</th>
+        <th>IS</th>
+        <th>FRIEND</th>
+        <th>HUMAN</th>
+        <th>ALWAYS</th>
+        <th>AND</th>
+        <th>BEEN</th>
+        <th>OUR</th>
+        <th>IT</th>
+        <th>HAS</th>
+      </tr>
+      <tr>
+        <td>Sentece 1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Sentece 2</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+      </tr>
+    </table>
 
     <p><strong>Second</strong>, knowing that the main issue with term frequency vounts is that it favours the longer sentences. In order to solve this we must normalize the frequencies, with the respective magnitudes. Summing up squares of each frequency and taking a square root.</p>
 
