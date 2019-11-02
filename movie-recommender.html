@@ -132,9 +132,9 @@
     <h5 id="jacardsimilarity">Jacard Similarity</h5>
 
     <p>Jacard similarity is defined as the size of the intersection over size of the union of both sets.
-    Example(taken from towardsdatascience):
-    Sentence 1: AI is our friend and it has been friendly
-    Sentence 2: AI and humans have always been friendly</p>
+    Example(taken from towardsdatascience):</p>
+    <p>Sentence 1: AI is our friend and it has been friendly</p>
+    <p>Sentence 2: AI and humans have always been friendly</p>
 
     <p>In order to calculate the similarity using the Jacard method, first we perform lemmeatization to get all to the words to their root word. Like "friend" and "friendly" will both become "friend".
     Let's look at the Venn diagram(taken from towardsdatascience):
@@ -142,7 +142,7 @@
       <img src="https://miro.medium.com/max/602/1*u2ZZPh5er5YbmOg7k-s0-A.png" alt="" /></p>
     </div>
 
-    <p>So for this internsection we get a Jaccard Similarity of 5/(5+3+2) = 0.5, which is the intersection size of the total amount of words.</p>
+    <p>So for this internsection we get a Jaccard Similarity of 5/(5+3+2) = 0.5, which is the intersection size over the total amount of words.</p>
 
     <h5 id="cosinesimilarity">Cosine Similarity</h5>
 
@@ -153,9 +153,9 @@
 
     <p>You might be wondering of to convert a sentence to a vector. One way is to use a bag of words with either TF (term frequency) or TF-IDF (term frequency - inverse document frequency). Another way is Word2Vec.</p>
 
-    <p>Let’s calculate cosine similarity for these two sentences:
-    Sentence 1: AI is our friend and it has been friendly
-    Sentence 2: AI and humans have always been friendly</p>
+    <p>Let’s calculate cosine similarity for these two sentences:</p>
+    <p>Sentence 1: AI is our friend and it has been friendly</p>
+    <p>Sentence 2: AI and humans have always been friendly</p>
 
     <p><strong>First</strong>, we get the Term Frequeccy using a bag of words:</p>
 
@@ -201,7 +201,9 @@
       </tr>
     </table>
 
-    <p><strong>Second</strong>, knowing that the main issue with term frequency vounts is that it favours the longer sentences. In order to solve this we must normalize the frequencies, with the respective magnitudes. Summing up squares of each frequency and taking a square root.</p>
+    <br>
+
+    <p><strong>Second</strong>, knowing that the main issue with term frequency counts is that it favours the longer sentences, in order to solve this we must normalize the frequencies, with their respective magnitudes. Summing up squares of each frequency and taking a square root.</p>
 
     <p><strong>Third</strong>, as we already have the nomralized the two vectors to have a length of 1 we can calculate the cosine similarity by using the dot product.</p>
 
@@ -241,14 +243,16 @@
 
     <p>Creating the vector and the similarity matrix:</p>
 
-    <pre><code class="python language-python">cv = CountVectorizer()
+    <pre><code class="python language-python">
+    cv = CountVectorizer()
     count_matrix = cv.fit_transform(df["combined_features"])
     cosine_sim = cosine_similarity(count_matrix)
     </code></pre>
 
     <p>Getting similar movies and sorting them:</p>
 
-    <pre><code class="python language-python">similar_movies = list(enumerate(cosine_sim[movie_index]))
+    <pre><code class="python language-python">
+    similar_movies = list(enumerate(cosine_sim[movie_index]))
     sorted_similar_movies = sorted(similar_movies,key=lambda x:x[1],reverse=True)[1:]
     </code></pre>
 
@@ -261,13 +265,13 @@
     <ul>
     <li>The Sixth Sense </li>
 
-    <li>The Departed </li>
+    <li><b>The Departed</b></li>
 
-    <li>Inception </li>
+    <li> <b>Inception</b> </li>
 
-    <li>The Wolf of Wall Street </li>
+    <li> <b>The Wolf of Wall Street</b> </li>
 
-    <li>The Aviator </li>
+    <li> <b>The Aviator</b> </li>
 
     <li>Gangs of New York </li>
     </ul>
@@ -314,13 +318,13 @@
     <li>The Prestige</li>
     </ul>
 
-    <p>We can say our resuts are not too bad considering our dataset is quite small.</p>
+    <p>We can say our resuts are not too bad considering our dataset is quite small, the matching ones are selected in bold.</p>
 
     <p>The results for a lot of movies are quite bad if we compare it to Google's suggestions. Central Intelligence for instance has none of the 5 our program gives.</p>
 
     <h2 id="whatcouldbebetter">What could be better</h2>
 
-    <p>So the results are not bad but could be improved, but how?
+    <p>So the results are not bad but could be improved, how?
     First they'd be much better if the dataset was bigger and there were more movies to choose from. We split the words and compare them but some coupling of words should be compared as pairs or tripplets, like the actors names for instance, if we see Leonardo DiCaprio we will match it to other Leonardos and other DiCaprios, this is not a very common first or last name but with some other names that are more common this is an issue.</p>
 
     <p>We could also do a different approach using Neural Networks that might find some different relations between the movies.</p>
