@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style media="screen">
+    .pimg1{
+      background-image:url(img/landing.jpg);
+      width: 100%;
+      height: 200px;
+    }
+    .tittlez{
+      text-align: center;
+    }
+    .pimg1 {
+    position: relative;
+    }
+    .ptext {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .ptext h3, p{
+      color: #000000;
+    }
+
+    .topz{
+      margin-top: 100px;
+    }
+
+    @media screen and (max-width: 960px) {
+      .first {
+        margin-top: 200px;
+      }
+      .topz{
+        margin-top: 0px;
+      }
+      .topz img{
+        margin-top: 100px;
+      }
+      .card{
+        margin-left: 50px;
+      }
+    }
+
+    h1 {
+      text-align:center;
+    }
+
+    h2 {
+      text-align:center;
+    }
+
+    h3 {
+      text-align:center;
+    }
+
+    img {
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+
+    </style>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="index.html">
+        <img class="rounded-circle" src="./img/profile.jpg" width="40" height="40" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="projects.html">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="experiences.html">Experiences</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="writings.html">Writings</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+  <br><br>
+  <div class="container">
+
+
+  <h1 id="movierecommendationsystem">Movie recommendation system</h1>
+
+    <p>Today we're going to see how to go about implementing a movie recommendation system.</p>
+
+    <h2 id="objective">Objective</h2>
+
+    <p>Our main objective is, given a movie title, check our dataset and see the top 5 most similar movies.</p>
+
+    <p>This similarity can be of various types, it could be rating similarity, content similarity or even collaborative filtering.</p>
+
+    <h4 id="ratingsimilarity">Rating similarity</h4>
+
+    <p>This is a rating or popularity based recommendation, based on views, likes, comments, ratings, reviews etc... This is what you get when you go to the trends.</p>
+
+    <h4 id="contentsimilarity">Content similarity</h4>
+
+    <p>This is what we are going to build today. So this similarity is based on the plot, title, cast, genre, etc... The movie's content. So we give it a movie title as input and based on it's content it will try to match it with the most similar to it, by ranking them.</p>
+
+    <h4 id="collaborativefiltering">Collaborative filtering</h4>
+
+    <p>This is when you have two users, user A and user B, and both watched a movie, so you recommend user A some movies that user B has watched and vice versa.
+    <div class="">
+      <img class="img-fluid" src="https://i0.wp.com/datameetsmedia.com/wp-content/uploads/2018/05/2ebah6c.png?resize=1024%2C627" alt="" /></p>
+    </div>
+
+    <p>Ok so let's see how to go about developing our content based recommendation system.</p>
+
+    <p>First, we are going to do a recommender based on similarity, so we need to define similarity.</p>
+
+    <p>There are a few text similarity methods but we'll look at the most common, Jaccard Similarity and Cosine Similarity.</p>
+
+    <h5 id="jacardsimilarity">Jacard Similarity</h5>
+
+    <p>Jacard similarity is defined as the size of the intersection over size of the union of both sets.
+    Example(taken from towardsdatascience):</p>
+    <p>Sentence 1: AI is our friend and it has been friendly</p>
+    <p>Sentence 2: AI and humans have always been friendly</p>
+
+    <p>In order to calculate the similarity using the Jacard method, first we perform lemmatization to get all to the words to their root word. Like "friend" and "friendly" will both become "friend".
+    Let's look at the Venn diagram(taken from towardsdatascience):
+    <div class="">
+      <img class="img-fluid" src="https://miro.medium.com/max/602/1*u2ZZPh5er5YbmOg7k-s0-A.png" alt="" /></p>
+    </div>
+
+    <p>So for this intersection we get a Jaccard Similarity of 5/(5+3+2) = 0.5, which is the intersection size over the total amount of words.</p>
+
+    <h5 id="cosinesimilarity">Cosine Similarity</h5>
+
+    <p>Cosine Similarity is calculated by measuring the cosine of angle between two vectors. This is calculated with:
+      <div class="">
+        <img class="img-fluid" src="https://miro.medium.com/max/554/1*hub04IikybZIBkSEcEOtGA.png" alt="" /></p>
+      </div>
+
+    <p>You might be wondering of to convert a sentence to a vector. One way is to use a bag of words with either TF (term frequency) or TF-IDF (term frequency - inverse document frequency). Another way is Word2Vec.</p>
+
+    <p>Let’s calculate cosine similarity for these two sentences:</p>
+    <p>Sentence 1: AI is our friend and it has been friendly</p>
+    <p>Sentence 2: AI and humans have always been friendly</p>
+
+    <p><strong>First</strong>, we get the Term Frequency using a bag of words:</p>
+
+    <div class="table-responsive">
+      <table class="table table-bordered" style="width:100%">
+        <thead class="thead-dark">
+        <tr>
+          <th>Sentence</th>
+          <th>AI</th>
+          <th>IS</th>
+          <th>FRIEND</th>
+          <th>HUMAN</th>
+          <th>ALWAYS</th>
+          <th>AND</th>
+          <th>BEEN</th>
+          <th>OUR</th>
+          <th>IT</th>
+          <th>HAS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sentence 1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>2</td>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Sentence 2</td>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+    <br>
+
+    <p><strong>Second</strong>, knowing that the main issue with term frequency counts is that it favours the longer sentences, in order to solve this we must normalize the frequencies, with their respective magnitudes. Summing up squares of each frequency and taking a square root.</p>
+
+    <p><strong>Third</strong>, as we already have the normalized the two vectors to have a length of 1 we can calculate the cosine similarity by using the dot product.</p>
+
+    <h5 id="differencesbetweenmethods">Differences between methods</h5>
+
+    <ul>
+    <li>Jaccard similarity takes only unique set of words for each sentence while cosine similarity takes total length of the vectors.</li>
+
+    <li>Jaccard similarity is good for cases where duplication does not matter, cosine similarity is good for cases where duplication matters while analyzing text similarity.</li>
+    </ul>
+
+    <p>We will use cosine similarity.</p>
+
+    <h2 id="thedataset">The dataset</h2>
+
+    <p>Looking online I found two viable options:</p>
+
+    <p><a href="https://raw.githubusercontent.com/codeheroku/Introduction-to-Machine-Learning/master/Building%20a%20Movie%20Recommendation%20Engine/movie_dataset.csv">3269 movies</a></p>
+
+    <p><a href="https://www.kaggle.com/carolzhangdc/imdb-5000-movie-dataset">5042 movies</a></p>
+
+    <p>I tried both of them and got similar results, though the keywords are not exactly the same for all movies in both datasets I found that the second dataset had more movies and also it also had better results, usually.</p>
+
+    <h2 id="thecode">The Code</h2>
+
+    <p>I'll highlight the important parts here, to check the full code see the <a href="https://github.com/Joao-Maria-Janeiro/Movie-Recommender/">GitHub repo</a>.</p>
+
+    <p>Reading from the file:</p>
+
+    <pre><code class="python language-python">df = pd.read_csv("test.csv",  engine='python', encoding='utf8', error_bad_lines=False)
+    </code></pre>
+
+    <p>Then selecting the features:</p>
+
+    <pre><code class="python language-python">features = ['plot_keywords', 'actor_1_name', 'actor_2_name', 'actor_3_name', 'genres', 'director_name']
+    </code></pre>
+
+    <p>Creating the vector and the similarity matrix:</p>
+
+    <pre><code class="python language-python">
+    cv = CountVectorizer()
+    count_matrix = cv.fit_transform(df["combined_features"])
+    cosine_sim = cosine_similarity(count_matrix)
+    </code></pre>
+
+    <p>Getting similar movies and sorting them:</p>
+
+    <pre><code class="python language-python">
+    similar_movies = list(enumerate(cosine_sim[movie_index]))
+    sorted_similar_movies = sorted(similar_movies,key=lambda x:x[1],reverse=True)[1:]
+    </code></pre>
+
+    <h2 id="theendresult">The end result</h2>
+
+    <p>We can't actually see how good our results are but let's do some quick comparisons to the results Google will give you.</p>
+
+    <p>If we search for, let's say, the movie Shutter Island we get:</p>
+
+    <ul>
+    <li>The Sixth Sense </li>
+
+    <li><b>The Departed</b></li>
+
+    <li> <b>Inception</b> </li>
+
+    <li> <b>The Wolf of Wall Street</b> </li>
+
+    <li> <b>The Aviator</b> </li>
+
+    <li> <b>Gangs of New York</b> </li>
+    </ul>
+
+    <p>Google will give you:</p>
+
+    <ul>
+    <li>Gone Baby Gone</li>
+
+    <li>Hugo</li>
+
+    <li>Zodiac</li>
+
+    <li>Mystic River</li>
+
+    <li>A Cure for Wellness</li>
+
+    <li>Maniac</li>
+
+    <li>In the Cut</li>
+
+    <li>The Silence of the Lambs</li>
+
+    <li>The Departed</li>
+
+    <li>One flew over the cuckoo's nest</li>
+
+    <li>Inception</li>
+
+    <li>Wolf of Wall Street</li>
+
+    <li>The Revenant</li>
+
+    <li>Gone Girl</li>
+
+    <li>Catch Me if You Can</li>
+
+    <li>Gangs of New York</li>
+
+    <li>The Aviator</li>
+
+    <li>Django Unchained</li>
+
+    <li>The Prestige</li>
+    </ul>
+
+    <p>We can say our results are not too bad considering our dataset is quite small, the matching ones are selected in bold.</p>
+
+    <p>The results for some movies are quite bad if we compare it to Google's suggestions. Central Intelligence for instance has none of the 5 our program gives.</p>
+
+    <h2 id="whatcouldbebetter">What could be better</h2>
+
+    <p>So the results are not bad but could be improved, how?
+    First they'd be much better if the dataset was bigger and there were more movies to choose from. We split the words and compare them but some coupling of words should be compared as pairs or triplets, like the actors names for instance, if we see Leonardo DiCaprio we will match it to other Leonardos and other DiCaprios, this is not a very common first or last name but with some other names that are more common this is an issue.</p>
+
+    <p>We could also do a different approach using Neural Networks that might find some different relations between the movies.</p>
+
+    <p>It's also worth considering looking into collaborative filtering, although a different dataset would be needed for that.</p>
+  </div>
+
+
+  <footer> <center>
+    <a style="color:gray;" href="https://github.com/Joao-Maria-Janeiro"><i style="font-size: 1.6em;" class="fab fa-github"></i></a>
+    <a style="color:gray;" href="https://www.linkedin.com/in/joaomariajaneiro/"><i style="font-size: 1.6em;" class="fab fa-linkedin"></i></a>
+  </center></footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+    </body>
+  </html>
