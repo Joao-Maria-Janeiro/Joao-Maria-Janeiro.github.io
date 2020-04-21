@@ -14,7 +14,7 @@ sass:
   style: :nested
 
 # Customise atom feed settings (this is where Jekyll-Feed gets configuration information)
-title:		           "João Maria Janeiro"
+title:		           "João M Janeiro"
 description:	       "Personal website for sharing thoughts and projects"
 author:              "João Maria Janeiro"
 
