@@ -1,5 +1,11 @@
 ---
 published: false
+layout: post
+author: João Maria Janeiro
+categories: sample
+tags:
+  - sample
+image: arctic-1.jpg
 ---
 # Building an intent recognition system
 
@@ -43,4 +49,3 @@ For the compiler we will use Adam as it is the most common, the loss function is
 ## Conclusions
 
 Our model is quite fragile to words out of vocabulary (words that it has never seen in it's dataset), this and the whole model's performance could really see a lot of benefits from an approach like word2vec or BERT as I mentioned before, but for this we would need a lot more data so, really, the thing that could really improve this project significantly would be having more data and, with that, change our tf-idf to a BERT approach.
-
