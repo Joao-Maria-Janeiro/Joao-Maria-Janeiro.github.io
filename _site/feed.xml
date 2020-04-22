@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-22T01:53:48+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">João Maria Janeiro</title><subtitle>Personal Website</subtitle><author><name>Paul Le</name></author><entry><title type="html">Extraction Summarizer</title><link href="http://localhost:4000/sample/extraction-summarizer.html" rel="alternate" type="text/html" title="Extraction Summarizer" /><published>2019-12-23T00:00:00+00:00</published><updated>2019-12-23T00:00:00+00:00</updated><id>http://localhost:4000/sample/extraction-summarizer</id><content type="html" xml:base="http://localhost:4000/sample/extraction-summarizer.html">&lt;h2 id=&quot;objective&quot;&gt;Objective&lt;/h2&gt;
+&lt;p&gt;Our objective for this project is, given a large corpus of text, create a short summary of 30% the size of the original corpus.&lt;/p&gt;
+
+&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
+&lt;p&gt;Everyday we are bombarded with tons and tons of articles, tweets, posts, news, etc… in written form, there is no way we can actually read everything if everything is quite long so, in a hope of being able to create automatic summaries for given corpus, I thought of doing this summarizer using Machine Learning.&lt;/p&gt;
+
+&lt;h2 id=&quot;details-about-summarization&quot;&gt;Details about summarization&lt;/h2&gt;
+&lt;p&gt;There are two main types of summarizations being done:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Extraction summarization&lt;/li&gt;
+  &lt;li&gt;Abstraction summarization&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In short, in extraction summarization our algorithm will get the most relevant sentences from the original corpus and, with that, create the summary.&lt;/p&gt;
+
+&lt;p&gt;The abstraction summary is more similar to what we, humans, do. So abstraction summary will actually generate a new text from the corpus it was fed.&lt;/p&gt;
+
+&lt;p&gt;Abstraction summarization is harder and it will be featured in my next post, but for now let’s focus on extraction summarization.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-will-we-go-about-doing-this&quot;&gt;How will we go about doing this?&lt;/h3&gt;
+&lt;p&gt;There are a lot of ways to go about doing this, I picked the one that, from what I saw, gets the best results. Check &lt;a href=&quot;https://towardsdatascience.com/comparing-text-summarization-techniques-d1e2e465584e&quot;&gt;this article&lt;/a&gt; for a comparison of good possible methods.&lt;/p&gt;
+
+&lt;p&gt;The idea is quite simple, so we get the corpus, from this corpus que tokenize it into sentences. From these sentences we generate word embeddings with context and from these we create sentence embeddings. After we have sentence embeddings we simply cluster our data, the number of clusters being 30% of the size of the original corpus. Now that we have some clusters we simply pick one sentence per cluster (the sentence that’s closest to the center of the cluster, which in theory, will be the best representation of the cluster) and then simply display those sentences.&lt;/p&gt;
+
+&lt;h4 id=&quot;sentence-tokenization&quot;&gt;Sentence tokenization&lt;/h4&gt;
+&lt;p&gt;For tokenizing our corpus into sentences we will make use of the sentence tokenizer in the NLTK library.&lt;/p&gt;
+
+&lt;h4 id=&quot;embeddings&quot;&gt;Embeddings&lt;/h4&gt;
+&lt;p&gt;This is the crucial part of our project. Why do we need embeddings? Why not just use Bag of Words or Tf-Idf? Since our project will be clustering the data, it will be comparing the vectors we generate in order to see how similar they are, bag of words does not capture the meaning of the words in the vector it generates so the generated clusters would be as good as random.&lt;/p&gt;
+
+&lt;p&gt;So are we going to use Word2Vec or GloVe? The answer is no. Despite the popularity of these embeddors, they are not enough for the good accuracy of this project. Yes they do have some inherent meaning in the vectors in relation to the words, so if you were to do “King” - “Man” + “Woman” it would give you the vector that represents the word “Queen” but this embeddors do not get context as they are pre-trained vectors, the same word used with a different meaning would have the same vector, for example:&lt;/p&gt;
+
+&lt;p&gt;“The man was accused of robbing a bank.” “The man went fishing by the bank of the river.”&lt;/p&gt;
+
+&lt;p&gt;Word2Vec would produce the same word embedding for the word “bank” in both sentences, so we need something a little better.&lt;/p&gt;
+
+&lt;p&gt;There are a lot of possibilities for this task but I chose BERT, the Google model.&lt;/p&gt;
+
+&lt;p&gt;What is bert exactly and why is it better than Word2Vec or GloVe?&lt;/p&gt;
+
+&lt;p&gt;As I mentioned before BERT takes the context of the words into account, it will generate an embedding based on next and previous context (bidirectional, will explain ahead), so BERT is pretty much a layer in your model, you still need to train it.&lt;/p&gt;
+
+&lt;p&gt;So how does it work and why is it so good? BERT is really good because it applies the bidirectional training of Transformer (which is an attention model). Before papers were only looking at text sequences from left to right or right to left, BERT is bidirectional. The transformer can learn relations between words and sub-words (sub-words are pieces of words like splitting “subword” to “sub” and “word”). It has two types of training:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;So what BERT will do is, before feeding it into the model, will mask about 15% of the words in each sentence and try to guess those words.&lt;/li&gt;
+  &lt;li&gt;It also tries to guess the next sentence, so the model gets a pair of sentences and learns to see if they are subsequent in the original corpus.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For more information regarding BERT check these articles, from &lt;a href=&quot;https://towardsdatascience.com/understanding-bert-is-it-a-game-changer-in-nlp-7cca943cf3ad&quot;&gt;Bharat S Raj&lt;/a&gt; and &lt;a href=&quot;https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270&quot;&gt;Rani Horev&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;So with this we have a token for each word in a sentence, so to generate a vector for a sentence we will simply average out all the words in a sentence and, thus, generating a single vector each sentence.&lt;/p&gt;
+
+&lt;p&gt;For this we will leverage this &lt;a href=&quot;https://github.com/imgarylai/bert-embedding&quot;&gt;repo&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;clustering&quot;&gt;Clustering&lt;/h4&gt;
+
+&lt;p&gt;Now that we have a vector for each sentence we can use cosine similarity to compare how similar each sentence is to each other and generate clusters. In order to do all this we will simply use leverage SKlearn’s Kmeans.&lt;/p&gt;
+
+&lt;h4 id=&quot;generating-the-summary&quot;&gt;Generating the summary&lt;/h4&gt;
+&lt;p&gt;As I mentioned before, generating the summary now is just getting the sentence that’s closest to the center of each cluster and print those sentences.&lt;/p&gt;
+
+&lt;p&gt;So let’s look at what our code currently generates:&lt;/p&gt;
+
+&lt;p&gt;The source text is:&lt;/p&gt;
+
+&lt;p&gt;“If Cristiano Ronaldo didn’t exist, would Lionel Messi have to invent him? The question of how much these two other-worldly players inspire each other is an interesting one, and it’s tempting to imagine Messi sitting at home on Tuesday night, watching Ronaldo destroying Atletico, angrily glaring at the TV screen and growling: ‘Right, I’ll show him!’ As appealing as that picture might be, however, it is probably a false one — from Messi’s perspective, at least. He might show it in a different way, but Messi is just as competitive as Ronaldo. Rather than goals and personal glory, however, the Argentine’s personal drug is trophies. Ronaldo, it can be said, never looks happy on the field of play unless he’s just scored a goal — and even then he’s not happy for long, because he just wants to score another one. And that relentless obsession with finding the back of the net has undoubtedly played a major role in his stunning career achievements. Messi, though, is a different animal, shown by the generosity with which he sets up team-mates even if he has a chance to shoot, regularly hands over penalty-taking duties to others and invariably celebrates a goal by turning straight to the player who passed him the ball with an appreciative smile. Rather than being a better player than Ronaldo, Messi’s main motivations — according to the people who are close to him — are being the best possible version of Lionel Messi, and winning as many trophies as possible. That theory was supported by Leicester boss Brendan Rodgers when I interviewed him for a book I recently wrote about Messi. Do Messi and Ronaldo inspire each other? ‘Maybe subconsciously in some way they've driven each other on,’ said Rodgers. ‘But I think both those players inherently have that hunger to be the best players they can be. With the very elite performers, that drive comes from within.’ Messi and Ronaldo ferociously competing with each other for everyone else’s acclaim is a nice story for fans to debate and the media to spread, but it’s probably not particularly true.”&lt;/p&gt;
+
+&lt;p&gt;Our generated summary is:&lt;/p&gt;
+
+&lt;p&gt;If Cristiano Ronaldo didn’t exist, would Lionel Messi have to invent him? Ronaldo, it can be said, never looks happy on the field of play unless he’s just scored a goal — and even then he’s not happy for long, because he just wants to score another one. Rather than goals and personal glory, however, the Argentine’s personal drug is trophies. Messi and Ronaldo ferociously competing with each other for everyone else’s acclaim is a nice story for fans to debate and the media to spread, but it’s probably not particularly true. ‘Maybe subconsciously in some way they’ve driven each other on,’ said Rodgers.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;I tried using lemmatization and stemming but that didn’t change the performance of our model. There are not many things that we could do to improve the performance of our model, our results are quite satisfactory so we could say this is a good method and a good model.&lt;/p&gt;</content><author><name>João Maria Janeiro</name></author><category term="sample" /><summary type="html">Objective Our objective for this project is, given a large corpus of text, create a short summary of 30% the size of the original corpus.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/extraction.png" /></entry><entry><title type="html">Building an intent recognition system</title><link href="http://localhost:4000/sample/intent-recognition.html" rel="alternate" type="text/html" title="Building an intent recognition system" /><published>2019-11-29T00:00:00+00:00</published><updated>2019-11-29T00:00:00+00:00</updated><id>http://localhost:4000/sample/intent-recognition</id><content type="html" xml:base="http://localhost:4000/sample/intent-recognition.html">&lt;!-- # Building an intent recognition system --&gt;
+
+&lt;h2 id=&quot;short-description&quot;&gt;Short Description&lt;/h2&gt;
+
+&lt;p&gt;With this project the objective was, given an user input ,recognize what the user intent was, this system is only able to recognize between 4 inputs: greeting, goodbye, price and images. We could feed it more data and make it able to recognize more intents but that was not the main focus of the project.&lt;/p&gt;
+
+&lt;p&gt;We were able to predict the intent quite well given our really small &lt;a href=&quot;https://github.com/Joao-Maria-Janeiro/Intent-Recognition/blob/master/intents.json&quot;&gt;dataset&lt;/a&gt;. Since just recognizing the intent is not the funniest, we built a little chat bot around it, as this is one of the intent recognition’s main applications. Our bot is able to get price and images of shoes contained &lt;a href=&quot;https://github.com/Joao-Maria-Janeiro/Intent-Recognition/blob/master/7004_1.csv&quot;&gt;here&lt;/a&gt;, you say the brand and it will give you all the options for that brand, we could have done the product name instead of the brand but some of those names are quite big and complex so the brand was easy enough for the demonstration purpose.&lt;/p&gt;
+
+&lt;h2 id=&quot;technologies-that-will-be-used&quot;&gt;Technologies that will be used&lt;/h2&gt;
+&lt;p&gt;For this project Tensorflow is going to be the main weapon of choice.
+The technologies used:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;numpy&lt;/li&gt;
+  &lt;li&gt;nltk&lt;/li&gt;
+  &lt;li&gt;pandas&lt;/li&gt;
+  &lt;li&gt;json&lt;/li&gt;
+  &lt;li&gt;tensorflow&lt;/li&gt;
+  &lt;li&gt;keras&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;parameters-choices&quot;&gt;Parameters choices&lt;/h2&gt;
+
+&lt;h3 id=&quot;data-preprocessing---code&quot;&gt;Data preprocessing - &lt;a href=&quot;https://github.com/Joao-Maria-Janeiro/Intent-Recognition/blob/master/data_handler.py&quot;&gt;code&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;For this project, since our dataset is quite small, using an implementation such as word2vec or BERT would not have the best performance as those methods require a lot of data, so… We will use our trusty friend Bag Of Words. Although bag of words is not very good as it does not save any relationship between words nor does it handle words out of vocabulary well, with our really small dataset it is still our best option.&lt;/p&gt;
+
+&lt;p&gt;Alright so how will we build this bag of words? First of all we will lemmatize our data using nltk’s WordNetLemmatizer, in case you are unfamiliar with lemmatization, it’s a technique used to remove inflectional endings and return the base word of a given word (e.g: churches -&amp;gt; church; dogs -&amp;gt; dog; am, are, is -&amp;gt; be ). This is handy as we do not want our results to change based on how the user will conjugate the words, with this lemmatization we remove this issue. We will also make our system case insensitive converting all words to lowercase and also remove all stop words.&lt;/p&gt;
+
+&lt;p&gt;After this word play is done, as you know our model only takes numbers as inputs so it is time to convert our sentences into vectors. To do so we will use sklearn’s TfidfVectorizer, if you don’t know what Tf-Idf is, it’s bag of words but instead of saving 1 in the word positions it’s saves the number of occurrences, this is important as some repeated words might have more meaning.
+Example:
+Let’s assume our dictionary are the words “are”, “cat”, “dog”, “is”, “the”, “crazy”, “beautiful”, “gorgeous”, “cute”.
+Given the sentence: “The cat is cute”, our bag of words and tf-idf vector would be [010110001]
+but given the sentence “The cat is cute and the cat is gorgeous”,
+our bow vector would be: [010110011], but the tf-idf would be [020220011].
+ This Tf-IDF vectorizer will use 1-grams (unigrams) and 2-grams (bigrams), so our vectorizer will create vectorizations for single words and for pairs of words, this is good as some pairs of words have more meaning together than apart, we could use larger n-grams but this would not give us much better accuracy.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-model---code&quot;&gt;The model - &lt;a href=&quot;https://github.com/Joao-Maria-Janeiro/Intent-Recognition/blob/master/main.py&quot;&gt;Code&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;For the model we will simply use 3 densely connected layers, the input layer, the middle layer with the rectified linear unit activation function and with 2/3 input nodes + output nodes (a generally good option) and finally the output layer with, you probably guessed it, softmax activation function.&lt;/p&gt;
+
+&lt;p&gt;For the compiler we will use Adam as it is the most common, the loss function is softmax cross entropy as this is a multi layer output and for metrics we will use accuracy.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;Our model is quite fragile to words out of vocabulary (words that it has never seen in it’s dataset), this and the whole model’s performance could really see a lot of benefits from an approach like word2vec or BERT as I mentioned before, but for this we would need a lot more data so, really, the thing that could really improve this project significantly would be having more data and, with that, change our tf-idf to a BERT approach.&lt;/p&gt;</content><author><name>João Maria Janeiro</name></author><category term="sample" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/intent.png" /></entry><entry><title type="html">Creating a movie recommender</title><link href="http://localhost:4000/sample/movie-recommender.html" rel="alternate" type="text/html" title="Creating a movie recommender" /><published>2019-11-02T00:00:00+00:00</published><updated>2019-11-02T00:00:00+00:00</updated><id>http://localhost:4000/sample/movie-recommender</id><content type="html" xml:base="http://localhost:4000/sample/movie-recommender.html">&lt;p&gt;Today we’re going to see how to go about implementing a movie recommendation system.&lt;/p&gt;
+
+&lt;h2 id=&quot;objective&quot;&gt;Objective&lt;/h2&gt;
+&lt;p&gt;Our main objective is, given a movie title, check our dataset and see the top 5 most similar movies.&lt;/p&gt;
+
+&lt;p&gt;This similarity can be of various types, it could be rating similarity, content similarity or even collaborative filtering.&lt;/p&gt;
+
+&lt;h4 id=&quot;rating-similarity&quot;&gt;Rating similarity&lt;/h4&gt;
+&lt;p&gt;This is a rating or popularity based recommendation, based on views, likes, comments, ratings, reviews etc… This is what you get when you go to the trends.&lt;/p&gt;
+
+&lt;h4 id=&quot;content-similarity&quot;&gt;Content similarity&lt;/h4&gt;
+&lt;p&gt;This is what we are going to build today. So this similarity is based on the plot, title, cast, genre, etc… The movie’s content. So we give it a movie title as input and based on it’s content it will try to match it with the most similar to it, by ranking them.&lt;/p&gt;
+
+&lt;h4 id=&quot;collaborative-filtering&quot;&gt;Collaborative filtering&lt;/h4&gt;
+&lt;p&gt;This is when you have two users, user A and user B, and both watched a movie, so you recommend user A some movies that user B has watched and vice versa.
+&lt;img src=&quot;https://i0.wp.com/datameetsmedia.com/wp-content/uploads/2018/05/2ebah6c.png?resize=1024%2C627&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ok so let’s see how to go about developing our content based recommendation system.&lt;/p&gt;
+
+&lt;p&gt;First, we are going to do a recommender based on similarity, so we need to define similarity.&lt;/p&gt;
+
+&lt;p&gt;There are a few text similarity methods but we’ll look at the most common, Jaccard Similarity and Cosine Similarity.&lt;/p&gt;
+
+&lt;h5 id=&quot;jacard-similarity&quot;&gt;Jacard Similarity&lt;/h5&gt;
+&lt;p&gt;Jacard similarity is defined as the size of the intersection over size of the union of both sets.
+Example(taken from towardsdatascience):
+Sentence 1: AI is our friend and it has been friendly
+Sentence 2: AI and humans have always been friendly&lt;/p&gt;
+
+&lt;p&gt;In order to calculate the similarity using the Jacard method, first we perform lemmeatization to get all to the words to their root word. Like “friend” and “friendly” will both become “friend”.
+Let’s look at the Venn diagram(taken from towardsdatascience):
+&lt;img src=&quot;https://miro.medium.com/max/602/1*u2ZZPh5er5YbmOg7k-s0-A.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So for this internsection we get a Jaccard Similarity of 5/(5+3+2) = 0.5, which is the intersection size of the total amount of words.&lt;/p&gt;
+
+&lt;h5 id=&quot;cosine-similarity&quot;&gt;Cosine Similarity&lt;/h5&gt;
+&lt;p&gt;Cosine Similarity is calculated by measuring the cosine of angle between two vectors. This is calculated with:
+&lt;img src=&quot;https://miro.medium.com/max/554/1*hub04IikybZIBkSEcEOtGA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You might be wondering of to convert a sentence to a vector. One way is to use a bag of words with either TF (term frequency) or TF-IDF (term frequency - inverse document frequency). Another way is Word2Vec.&lt;/p&gt;
+
+&lt;p&gt;Let’s calculate cosine similarity for these two sentences:
+Sentence 1: AI is our friend and it has been friendly
+Sentence 2: AI and humans have always been friendly&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;First&lt;/strong&gt;, we get the Term Frequeccy using a bag of words:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Sentence&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;AI&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;IS&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;FRIEND&lt;/th&gt;
+      &lt;th&gt;HUMAN&lt;/th&gt;
+      &lt;th&gt;ALWAYS&lt;/th&gt;
+      &lt;th&gt;AND&lt;/th&gt;
+      &lt;th&gt;BEEN&lt;/th&gt;
+      &lt;th&gt;OUR&lt;/th&gt;
+      &lt;th&gt;IT&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;HAS&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Sentece 1&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;2&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Sentece 2&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;Second&lt;/strong&gt;, knowing that the main issue with term frequency vounts is that it favours the longer sentences. In order to solve this we must normalize the frequencies, with the respective magnitudes. Summing up squares of each frequency and taking a square root.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Third&lt;/strong&gt;, as we already have the nomralized the two vectors to have a length of 1 we can calculate the cosine similarity by using the dot product.&lt;/p&gt;
+
+&lt;h5 id=&quot;differences-between-methods&quot;&gt;Differences between methods&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;Jaccard similarity takes only unique set of words for each sentence while cosine similarity takes total length of the vectors.&lt;/li&gt;
+  &lt;li&gt;Jaccard similarity is good for cases where duplication does not matter, cosine similarity is good for cases where duplication matters while analyzing text similarity.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We will use cosine similarity.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-dataset&quot;&gt;The dataset&lt;/h2&gt;
+&lt;p&gt;Looking online I found two viable options:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://raw.githubusercontent.com/codeheroku/Introduction-to-Machine-Learning/master/Building%20a%20Movie%20Recommendation%20Engine/movie_dataset.csv&quot;&gt;3269 movies&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.kaggle.com/carolzhangdc/imdb-5000-movie-dataset&quot;&gt;5042 movies&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I tried both of them and got similar results, though the keywords are not exactly the same for all movies in both datasets I found that the second dataset had more movies and also it also had better results, usually.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-code&quot;&gt;The Code&lt;/h2&gt;
+
+&lt;p&gt;I’ll higlight the important parts here, to check the full code see the GitHub repo.&lt;/p&gt;
+
+&lt;p&gt;Reading from the file:&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;test.csv&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'python'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'utf8'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error_bad_lines&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then selecting the features:&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;features&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'plot_keywords'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'actor_1_name'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'actor_2_name'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'actor_3_name'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'genres'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'director_name'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Creating the vector and the similarity matrix:&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CountVectorizer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;count_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;combined_features&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cosine_sim&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cosine_similarity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Getting similar movies and sorting them:&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;similar_movies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cosine_sim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;movie_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sorted_similar_movies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;similar_movies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reverse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;the-end-result&quot;&gt;The end result&lt;/h2&gt;
+&lt;p&gt;We can’t actually see how good our results are but let’s do some quick comparisons to the results Google will give you.&lt;/p&gt;
+
+&lt;p&gt;If we search for, let’s say, the movie Shutter Island we get:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The Sixth Sense &lt;/li&gt;
+  &lt;li&gt;The Departed &lt;/li&gt;
+  &lt;li&gt;Inception &lt;/li&gt;
+  &lt;li&gt;The Wolf of Wall Street &lt;/li&gt;
+  &lt;li&gt;The Aviator &lt;/li&gt;
+  &lt;li&gt;Gangs of New York &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Google will give you:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Gone Baby Gone&lt;/li&gt;
+  &lt;li&gt;Hugo&lt;/li&gt;
+  &lt;li&gt;Zodiac&lt;/li&gt;
+  &lt;li&gt;Mystic River&lt;/li&gt;
+  &lt;li&gt;A Cure for Wellness&lt;/li&gt;
+  &lt;li&gt;Maniac&lt;/li&gt;
+  &lt;li&gt;In the Cut&lt;/li&gt;
+  &lt;li&gt;The Silence of the Lambs&lt;/li&gt;
+  &lt;li&gt;The Departed&lt;/li&gt;
+  &lt;li&gt;One flew Over the Curf&lt;/li&gt;
+  &lt;li&gt;Inception&lt;/li&gt;
+  &lt;li&gt;Wolf of Wall Street&lt;/li&gt;
+  &lt;li&gt;The Revenant&lt;/li&gt;
+  &lt;li&gt;Gone Girl&lt;/li&gt;
+  &lt;li&gt;Catch Me if You Can&lt;/li&gt;
+  &lt;li&gt;Gangs of New Yotk&lt;/li&gt;
+  &lt;li&gt;The Aviator&lt;/li&gt;
+  &lt;li&gt;Django Unchained&lt;/li&gt;
+  &lt;li&gt;The Prestige&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We can say our resuts are not too bad considering our dataset is quite small.&lt;/p&gt;
+
+&lt;p&gt;The results for a lot of movies are quite bad if we compare it to Google’s suggestions. Central Intelligence for instance has none of the 5 our program gives.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-could-be-better&quot;&gt;What could be better&lt;/h2&gt;
+&lt;p&gt;So the results are not bad but could be improved, but how?
+First they’d be much better if the dataset was bigger and there were more movies to choose from. We split the words and compare them but some coupling of words should be compared as pairs or tripplets, like the actors names for instance, if we see Leonardo DiCaprio we will match it to other Leonardos and other DiCaprios, this is not a very common first or last name but with some other names that are more common this is an issue.&lt;/p&gt;
+
+&lt;p&gt;We could also do a different approach using Neural Networks that might find some different relations between the movies.&lt;/p&gt;
+
+&lt;p&gt;It’s also worth considering looking into collaborative filtering, although a different dataset would be needed for that.&lt;/p&gt;</content><author><name>João Maria Janeiro</name></author><category term="sample" /><summary type="html">Today we’re going to see how to go about implementing a movie recommendation system.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/movie-recommender.png" /></entry><entry><title type="html">The Google Internship</title><link href="http://localhost:4000/internships/google.html" rel="alternate" type="text/html" title="The Google Internship" /><published>2019-07-08T00:00:00+01:00</published><updated>2019-07-08T00:00:00+01:00</updated><id>http://localhost:4000/internships/google</id><content type="html" xml:base="http://localhost:4000/internships/google.html">&lt;p&gt;If you’re here you are probably applying to, or considering a Google internship or you might just be curious.&lt;/p&gt;
+
+&lt;p&gt;Let me tell you about my experience!&lt;/p&gt;
+
+&lt;h2 id=&quot;applying&quot;&gt;Applying&lt;/h2&gt;
+&lt;p&gt;So the first step to apply for a Google internship is going to careers.google.com. After you go to the website, if you are a student looking for an internship you should go here: &lt;a href=&quot;https://careers.google.com/jobs/results/?category=DATA_CENTER_OPERATIONS&amp;amp;category=DEVELOPER_RELATIONS&amp;amp;category=HARDWARE_ENGINEERING&amp;amp;category=INFORMATION_TECHNOLOGY&amp;amp;category=MANUFACTURING_SUPPLY_CHAIN&amp;amp;category=NETWORK_ENGINEERING&amp;amp;category=PRODUCT_MANAGEMENT&amp;amp;category=PROGRAM_MANAGEMENT&amp;amp;category=SOFTWARE_ENGINEERING&amp;amp;category=TECHNICAL_INFRASTRUCTURE_ENGINEERING&amp;amp;category=TECHNICAL_SOLUTIONS&amp;amp;category=TECHNICAL_WRITING&amp;amp;company=Google&amp;amp;company=Google%20Fiber&amp;amp;company=YouTube&amp;amp;employment_type=INTERN&amp;amp;q=&quot;&gt;students&lt;/a&gt;. Now you see a lot of different options, you should read what each option is as some are quite different but the most common, and the one I did, is Software Engineering Intern. Now depending on your academic level you should either apply for a BSc or MSc position, I applied for a BSc as I was a sophomore when I applied.&lt;/p&gt;
+
+&lt;h2 id=&quot;you-now-know-what-you-want-to-apply-to-how-to-make-a-good-application&quot;&gt;You now know what you want to apply to, how to make a good application?&lt;/h2&gt;
+
+&lt;p&gt;For this you’ll need to provide your full name, your address, email, phone number, your education, a cover letter, a transcript and your resume.&lt;/p&gt;
+
+&lt;p&gt;It’s important to focus on a really strong resume, for this one I saw a lot of videos and read a bunch of stuff on how to write a good CV, I can provide some tips I learned but I do suggest you also do some research on your own, here are some tips:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;For each experience you mention focus on what YOU learned and what you did, not what the whole team or what was the purpose of the project, if possible it’s also good to show your impact on the project, how did your contributions affect the project and if possible, give numbers&lt;/li&gt;
+  &lt;li&gt;You should keep your CV at a single page, even if you have a lot of projects, experiences and etc…. really do try to keep it under one page&lt;/li&gt;
+  &lt;li&gt;Order your CV in a priority descending way, so educations usually comes first and then if experience is more important than you projects or the other way around, choose the order accordingly.&lt;/li&gt;
+  &lt;li&gt;Inside a section, like experiences, they should be in a descending order of when they occured&lt;/li&gt;
+  &lt;li&gt;You should use bullet points when writing the experiences&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A good resource is also looking at the book &lt;a href=&quot;https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850/ref=sr_1_1?crid=18DKWLHLIG752&amp;amp;keywords=cracking+the+coding+interview&amp;amp;qid=1572021260&amp;amp;sprefix=craking+the+co%2Caps%2C182&amp;amp;sr=8-1&quot;&gt;cracking the coding interview&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that you have a resume you should write a good cover letter, again I’d suggest you to see some tips online as this is also an important factor and a good place to elaborate more on some of the stuff you mentioned on your resume, they should both work together.&lt;/p&gt;
+
+&lt;h2 id=&quot;you-got-an-email-saying-you-are-moving-to-the-next-steps-now-what&quot;&gt;You got an email saying you are moving to the next steps now what?&lt;/h2&gt;
+&lt;p&gt;After this you’ll have to fill some forms regarding grades, education, you preferences, what you know what you don’t some things about you, this is all stuff you don’t need to prepare for, you just need to answer it.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-coding-interviews&quot;&gt;The coding interviews&lt;/h2&gt;
+&lt;p&gt;This is the big focus of the recruiting part!&lt;/p&gt;
+
+&lt;p&gt;How do you prepare for this mythical interviews?&lt;/p&gt;
+
+&lt;p&gt;For this, I started with the book I mentioned, cracking the coding interview, I read all the theoretical part before tackling the questions as I had not learned algorithms and data structures in class yet.&lt;/p&gt;
+
+&lt;p&gt;After I read them I look most of the algorithms and data structures online in the book author’s channel, &lt;a href=&quot;https://www.youtube.com/channel/UCOf7UPMHBjAavgD0Qw5q5ww&quot;&gt;hacker rank&lt;/a&gt; and &lt;a href=&quot;https://www.geeksforgeeks.org/&quot;&gt;geeks for geeks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;After I had a somewhat solid base I went straight for the hard problems section and I did most of the questions there, I was not able to to all of them and I learned a lot in the solutions provided.&lt;/p&gt;
+
+&lt;p&gt;Now that I knew a bunch of new stuff in order to keep practicing I went to &lt;a href=&quot;https://leetcode.com/&quot;&gt;leetcode&lt;/a&gt; and here I really did a lot of problems, mainly hard.&lt;/p&gt;
+
+&lt;p&gt;This is all I did to prepare, I did a lot of problems on leetcode and they are very similar to what you’ll find in the interviews so it really is a good way to practice, read the solutions if available or the discussions on the problems and you’ll learn a lot.&lt;/p&gt;
+
+&lt;h2 id=&quot;you-passed-the-coding-interviews-what-comes-next&quot;&gt;You passed the coding interviews, what comes next?&lt;/h2&gt;
+&lt;p&gt;After you nail the coding interviews, you’ll go into a phase called host matching. In this phase what happens is that all candidates are thrown into a pool. Google engineers that are looking for an intern have access to this tool and will look for a candidate for their position. They will read a preference form that you’ll have to fill and they’ll see if you’re good for their position. If they think you’d be a good fit they ask for an interview with you.&lt;/p&gt;
+
+&lt;h3 id=&quot;you-got-an-interview-how-to-stand-out&quot;&gt;You got an interview, how to stand out?&lt;/h3&gt;
+&lt;p&gt;This is a though one, you should above all, show your excitement about this opportunity! You should, before the interview, look the team and project (if possible) online and prepare some questions and curiosities you might have as this will be very important! These are really the important points to focus on! The rest will just be a chat and the host will probably have some questions for you, just answer them openly!&lt;/p&gt;
+
+&lt;h2 id=&quot;how-was-the-internship-and-the-experience&quot;&gt;How was the internship and the experience?&lt;/h2&gt;
+&lt;p&gt;I was selected for New York and I worked on the Google Ads team, between 8 July - 27 September with Angular dart and Java doing full stack web dev. The project itself, as most projects at Google, was really cool! At first it didn’t seem that challenging but I quickly discovered that was wrong.&lt;/p&gt;
+
+&lt;p&gt;The New York office is amazing, everyone is so nice, always open to talk to you and share their thoughts and what they’re working on, I really tried to meet a lot of people and know more about what they do so I could know the projects available at Google, it was super cool!!&lt;/p&gt;
+
+&lt;p&gt;They have a lot of initiatives for us to meet with other Googlers and I tried most of them and everyone was always super cool!&lt;/p&gt;
+
+&lt;p&gt;The internship itself was a real blast! I was able to learn a lot about new technologies there and really think differently about most problems and think about a lot of different stuff I didn’t before.
+I was able to finish the project quickly so I was actually assigned a second project that was also really cool but that I did not manage to finish.&lt;/p&gt;
+
+&lt;p&gt;The other interns were all super nice and we all traveled to some other states and to Canada, it was a really nice experience that I’d totally recommend to everyone who likes coding!&lt;/p&gt;</content><author><name>João Maria Janeiro</name></author><category term="internships" /><summary type="html">If you’re here you are probably applying to, or considering a Google internship or you might just be curious.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/google.png" /></entry><entry><title type="html">The SAP Internship</title><link href="http://localhost:4000/internships/sap.html" rel="alternate" type="text/html" title="The SAP Internship" /><published>2018-07-15T00:00:00+01:00</published><updated>2018-07-15T00:00:00+01:00</updated><id>http://localhost:4000/internships/sap</id><content type="html" xml:base="http://localhost:4000/internships/sap.html">&lt;h1 id=&quot;what-was-it-like-to-intern-at-sap-portugal&quot;&gt;What was it like to intern at SAP Portugal?&lt;/h1&gt;
+
+&lt;h3 id=&quot;what-was-the-goal-of-the-intership&quot;&gt;What was the goal of the intership?&lt;/h3&gt;
+
+&lt;p&gt;The goal of the internship was to use my created code as a sample for a
+class in Spring Framework and microservices which was going to be held
+by my mentor &lt;a href=&quot;https://www.linkedin.com/in/christianborges/&quot;&gt;Chritstian
+Franco&lt;/a&gt; to the SAP CX
+Commerce.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-did-i-prepare&quot;&gt;How did I prepare?&lt;/h3&gt;
+
+&lt;p&gt;In order to be ready for this internship I had to learn Java and some
+Java 8 specific methods as well as understand RESTFul web services.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-tasks-did-i-do&quot;&gt;What tasks did I do?&lt;/h3&gt;
+
+&lt;p&gt;Before my main and final assignment I did several others. I wrote a
+document on the groovy language and highlighting its differences against
+Java, I had to read some papers on SCRUM and answer a questionnaire with
+SCRUM related questions, I had a presentation on software Craftsmanship,
+I learned the design patterns (Facade pattern, Service pattern,
+Repository pattern, Singleton pattern, MVC pattern and Strategy
+pattern), I got to go along a team working day from the Ericsson project
+(watched the prints, daily meeting, the dry run presentation and the
+agile task board on jira) and I also did some small Java programs before
+the big one.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-final-project&quot;&gt;The final project&lt;/h3&gt;
+
+&lt;p&gt;I’ll start with the description, then the requirements and my thoughts.&lt;/p&gt;
+
+&lt;h4 id=&quot;description&quot;&gt;Description&lt;/h4&gt;
+
+&lt;p&gt;Develop a Microservice based on Spring Boot in order to serve RESTFul
+web services for E-Commerce platforms.&lt;/p&gt;
+
+&lt;h4 id=&quot;requirements&quot;&gt;Requirements&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Use Trello to create the Agile Task Board.&lt;/li&gt;
+  &lt;li&gt;Create the relational mapping in JPA based on given the UML class
+diagram.&lt;/li&gt;
+  &lt;li&gt;Use the “Software Craftsmanship” and “Good Practices” concepts.&lt;/li&gt;
+  &lt;li&gt;Create integration and unit tests.&lt;/li&gt;
+  &lt;li&gt;The endpoints must be RESTFul and use JSON payloads.&lt;/li&gt;
+  &lt;li&gt;Must respect the enterprise pattern (Controller -&amp;gt; Facade -&amp;gt;
+Service -&amp;gt; Repository).&lt;/li&gt;
+  &lt;li&gt;Must use the new Java8 resources such as Stream API, Optionals and
+Lambdas.&lt;/li&gt;
+  &lt;li&gt;Must use the following technologies: IntelliJ IDEA, MAVEN, Spring
+Boot, Git, RESTFul services, Spring Data, JPA Entities, Lombok project,
+JSON, Apache Lang Uitls e Google Guava&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The project was pretty much a full e-commerce backend developed from
+scratch using Spring Boot. I had to create the models and their
+relations (showed in the class diagram up next) and all the methods
+associated with their usage.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;./img/class_diagram.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;overview-of-the-main-technologies-used&quot;&gt;Overview of the main technologies used&lt;/h4&gt;
+
+&lt;p&gt;Scrum Framework, Spring Boot, Java 8, SAP CX Commerce, UML, Maven,
+Spring MVC, H2 DB, Spring Data and Spring Rest Controllers.&lt;/p&gt;
+
+&lt;h4 id=&quot;overview-of-the-main-concepts-used&quot;&gt;Overview of the main concepts used&lt;/h4&gt;
+
+&lt;p&gt;E-commerce challenges and solutions, Design Patterns, Object Oriented
+Programming (OOP), Microservices, Authentitacion VS Authorization, Team
+work, Agile, Clena Code, TDD, Enterprise Back ends and RESTFul APIs.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-was-the-experience-like&quot;&gt;What was the experience like&lt;/h3&gt;
+
+&lt;p&gt;The whole team had a pretty chilled and good working environment. I stayed there between 15 July - 15 August.
+Everyone gets along really well and they can ask each other questions or
+share some cool stuff they did and it’s a really good place to work at.
+I always had lunch in the office with a bunch of team mates and they
+were all super nice. Most of them were really smart and good at their
+job which created some really interesting chats where they all had a lot
+of opinions and insights which they shared with me. I learned a lot at
+SAP, both programming wise and in a more personal way. I recommend it to
+everyone who would like to do a 1 month internship on web development to
+give it a look.&lt;/p&gt;
+
+&lt;h3 id=&quot;my-evaluation&quot;&gt;My Evaluation&lt;/h3&gt;
+
+&lt;p&gt;My mentor gave me a score of 20 in a 0-20 scale. He wrote an internhip
+evaluation which you can check
+&lt;a href=&quot;https://drive.google.com/file/d/1FauCoJ-kA9Utp0EU08fOkeQwj5crU1ku/view?usp=sharing&quot;&gt;here&lt;/a&gt;.
+The whole internhip went really well and at the end I was invited to
+work there after I finished college.&lt;/p&gt;
+
+&lt;h4 id=&quot;you-can-check-the-whole-project-here&quot;&gt;You can check the whole project &lt;a href=&quot;https://github.com/Joao-Maria-Janeiro/SpringBootBackend&quot;&gt;here&lt;/a&gt;.&lt;/h4&gt;</content><author><name>João Maria Janeiro</name></author><category term="internships" /><summary type="html">What was it like to intern at SAP Portugal?</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/sap.png" /></entry></feed>

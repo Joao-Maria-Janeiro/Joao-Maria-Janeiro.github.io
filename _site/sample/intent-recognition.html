@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <title>
+    
+      Building an intent recognition system | João Maria Janeiro
+    
+  </title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+  <!-- Use Atom -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="João Maria Janeiro" />
+  <!-- RSS-v2.0
+  <link href="/rss-feed.xml" type="application/rss+xml" rel="alternate" title="João Maria Janeiro | Personal Website"/>
+  //-->
+
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Source+Code+Pro">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+  <!-- Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-112060364-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <!-- Use Jekyll SEO plugin -->
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Building an intent recognition system | João Maria Janeiro</title>
+<meta name="generator" content="Jekyll v3.6.3" />
+<meta property="og:title" content="Building an intent recognition system" />
+<meta name="author" content="João Maria Janeiro" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Personal Website" />
+<meta property="og:description" content="Personal Website" />
+<link rel="canonical" href="http://localhost:4000/sample/intent-recognition.html" />
+<meta property="og:url" content="http://localhost:4000/sample/intent-recognition.html" />
+<meta property="og:site_name" content="João Maria Janeiro" />
+<meta property="og:image" content="http://localhost:4000/intent.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-29T00:00:00+00:00" />
+<script type="application/ld+json">
+{"description":"Personal Website","author":{"@type":"Person","name":"João Maria Janeiro"},"@type":"BlogPosting","url":"http://localhost:4000/sample/intent-recognition.html","image":"http://localhost:4000/intent.png","headline":"Building an intent recognition system","dateModified":"2019-11-29T00:00:00+00:00","datePublished":"2019-11-29T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/sample/intent-recognition.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+<body>
+
+<div class="container">
+  <header class="site-header">
+  <h3 class="site-title">
+    <a href="/">João Maria Janeiro</a>
+  </h3>
+  <nav class="menu-list">
+    
+      <a href="/pages/sample-posts.html" class="menu-link">Posts</a>
+    
+      <a href="/pages/internships.html" class="menu-link">Internships</a>
+    
+      <a href="/pages/about.html" class="menu-link">About</a>
+    
+
+    
+      <a href="https://www.linkedin.com/in/joaomariajaneiro/" class="menu-link" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+    
+      <a href="https://github.com/Joao-Maria-Janeiro" class="menu-link" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+    
+      <a href="mailto:l.nguyen.paul@gmail.com" class="menu-link" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+    
+      <a href="feed.xml" class="menu-link" target="_blank"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+    
+  </nav>
+  <div class="dropdown">
+    <button class="dropbtn"><i class="fa fa-bars" aria-hidden="true"></i></button>
+    <div class="dropdown-content">
+      
+        <a href="/pages/sample-posts.html" class="menu-link">Posts</a>
+      
+        <a href="/pages/internships.html" class="menu-link">Internships</a>
+      
+        <a href="/pages/about.html" class="menu-link">About</a>
+      
+
+      
+        <a href="https://www.linkedin.com/in/joaomariajaneiro/" class="menu-link" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+      
+        <a href="https://github.com/Joao-Maria-Janeiro" class="menu-link" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+      
+        <a href="mailto:l.nguyen.paul@gmail.com" class="menu-link" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+      
+        <a href="feed.xml" class="menu-link" target="_blank"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+      
+    </div>
+  </div>
+</header>
+
+  <div class="posts-wrapper">
+    <div class="page-content">
+  <h1>
+    Building an intent recognition system
+  </h1>
+
+  <span class="post-date">
+    Written on
+    
+    November
+    29th,
+    2019
+    by
+    
+      João Maria Janeiro
+    
+  </span>
+
+  
+    <div class="featured-image">
+      <img src="/assets/img/intent.png">
+    </div>
+  
+
+  <article>
+    <!-- # Building an intent recognition system -->
+
+<h2 id="short-description">Short Description</h2>
+
+<p>With this project the objective was, given an user input ,recognize what the user intent was, this system is only able to recognize between 4 inputs: greeting, goodbye, price and images. We could feed it more data and make it able to recognize more intents but that was not the main focus of the project.</p>
+
+<p>We were able to predict the intent quite well given our really small <a href="https://github.com/Joao-Maria-Janeiro/Intent-Recognition/blob/master/intents.json">dataset</a>. Since just recognizing the intent is not the funniest, we built a little chat bot around it, as this is one of the intent recognition’s main applications. Our bot is able to get price and images of shoes contained <a href="https://github.com/Joao-Maria-Janeiro/Intent-Recognition/blob/master/7004_1.csv">here</a>, you say the brand and it will give you all the options for that brand, we could have done the product name instead of the brand but some of those names are quite big and complex so the brand was easy enough for the demonstration purpose.</p>
+
+<h2 id="technologies-that-will-be-used">Technologies that will be used</h2>
+<p>For this project Tensorflow is going to be the main weapon of choice.
+The technologies used:</p>
+
+<ul>
+  <li>numpy</li>
+  <li>nltk</li>
+  <li>pandas</li>
+  <li>json</li>
+  <li>tensorflow</li>
+  <li>keras</li>
+</ul>
+
+<h2 id="parameters-choices">Parameters choices</h2>
+
+<h3 id="data-preprocessing---code">Data preprocessing - <a href="https://github.com/Joao-Maria-Janeiro/Intent-Recognition/blob/master/data_handler.py">code</a></h3>
+<p>For this project, since our dataset is quite small, using an implementation such as word2vec or BERT would not have the best performance as those methods require a lot of data, so… We will use our trusty friend Bag Of Words. Although bag of words is not very good as it does not save any relationship between words nor does it handle words out of vocabulary well, with our really small dataset it is still our best option.</p>
+
+<p>Alright so how will we build this bag of words? First of all we will lemmatize our data using nltk’s WordNetLemmatizer, in case you are unfamiliar with lemmatization, it’s a technique used to remove inflectional endings and return the base word of a given word (e.g: churches -&gt; church; dogs -&gt; dog; am, are, is -&gt; be ). This is handy as we do not want our results to change based on how the user will conjugate the words, with this lemmatization we remove this issue. We will also make our system case insensitive converting all words to lowercase and also remove all stop words.</p>
+
+<p>After this word play is done, as you know our model only takes numbers as inputs so it is time to convert our sentences into vectors. To do so we will use sklearn’s TfidfVectorizer, if you don’t know what Tf-Idf is, it’s bag of words but instead of saving 1 in the word positions it’s saves the number of occurrences, this is important as some repeated words might have more meaning.
+Example:
+Let’s assume our dictionary are the words “are”, “cat”, “dog”, “is”, “the”, “crazy”, “beautiful”, “gorgeous”, “cute”.
+Given the sentence: “The cat is cute”, our bag of words and tf-idf vector would be [010110001]
+but given the sentence “The cat is cute and the cat is gorgeous”,
+our bow vector would be: [010110011], but the tf-idf would be [020220011].
+ This Tf-IDF vectorizer will use 1-grams (unigrams) and 2-grams (bigrams), so our vectorizer will create vectorizations for single words and for pairs of words, this is good as some pairs of words have more meaning together than apart, we could use larger n-grams but this would not give us much better accuracy.</p>
+
+<h3 id="the-model---code">The model - <a href="https://github.com/Joao-Maria-Janeiro/Intent-Recognition/blob/master/main.py">Code</a></h3>
+<p>For the model we will simply use 3 densely connected layers, the input layer, the middle layer with the rectified linear unit activation function and with 2/3 input nodes + output nodes (a generally good option) and finally the output layer with, you probably guessed it, softmax activation function.</p>
+
+<p>For the compiler we will use Adam as it is the most common, the loss function is softmax cross entropy as this is a multi layer output and for metrics we will use accuracy.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>Our model is quite fragile to words out of vocabulary (words that it has never seen in it’s dataset), this and the whole model’s performance could really see a lot of benefits from an approach like word2vec or BERT as I mentioned before, but for this we would need a lot more data so, really, the thing that could really improve this project significantly would be having more data and, with that, change our tf-idf to a BERT approach.</p>
+
+
+  </article>
+
+  <div class="post-share">
+    <div class="post-date">Feel free to share!</div>
+    <div class="sharing-icons">
+      <a href="https://twitter.com/intent/tweet?text=Building an intent recognition system&amp;url=/sample/intent-recognition.html" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/sample/intent-recognition.html&amp;title=Building an intent recognition system" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+      <a href="https://plus.google.com/share?url=/sample/intent-recognition.html" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+    </div>
+  </div>
+
+  <div class="related">
+    <h2>You may also enjoy...</h2>
+    
+    <ul class="related-posts">
+      
+        
+          
+            <li>
+              <h3>
+                <a href="/sample/extraction-summarizer.html">
+                  <div class="related-thumbnail">
+                    
+                      <img src="http://localhost:4000/assets/img/extraction.png">
+                    
+                  </div>
+                  <div class="related-title">
+                    Extraction Summarizer
+                  </div>
+                  <!--<small>December 23, 2019</small>-->
+                </a>
+              </h3>
+            </li>
+            
+          
+        
+          
+          
+        
+      
+    </ul>
+  </div>
+
+  
+
+</div>
+
+  </div>
+  <footer class="footer">
+  
+    <a href="https://www.linkedin.com/in/joaomariajaneiro/" class="menu-link" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  
+    <a href="https://github.com/Joao-Maria-Janeiro" class="menu-link" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+  
+    <a href="mailto:l.nguyen.paul@gmail.com" class="menu-link" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+  
+    <a href="feed.xml" class="menu-link" target="_blank"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+  
+  <div class="post-date"><a href="/">João Maria Janeiro | Personal Website by Paul Le</a></div>
+</footer>
+
+</div>
+
+</body>
+</html>
