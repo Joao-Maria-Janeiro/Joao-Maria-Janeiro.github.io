@@ -3,7 +3,7 @@ layout: post
 title: "Building an intent recognition system"
 author: "João Maria Janeiro"
 categories: sample
-tags: [sample]
+tags: [Machine Learning]
 image: intent.png
 ---
 
