@@ -4,7 +4,7 @@ title: "Handling Anonymous Users"
 author: "João Maria Janeiro"
 categories: sample
 tags: [Web Dev]
-image: extraction.png
+image: users.png
 ---
 
 Anonymous users is a big part of web development and e-commerce, more specifically. What makes it so important? It's the first experience users have on your website! 
