@@ -74,7 +74,7 @@ I've been fascinated by technology ever since I can remember and, due to that, I
               <span> Internship at Google New York, Ads team</span></li>
             <li>
               <time datetime="10:03">July 2020</time> 
-              <span> Internship at Google Lisbon (was recruited for Mountain View, Sillicon Valley but changed due to covid)</span></li>
+              <span> Internship at Google London (was recruited for Mountain View, Sillicon Valley but changed due to covid)</span></li>
             <!-- <li>
               <time datetime="10:03">10:03</time> 
               <span> On time</span></li>
