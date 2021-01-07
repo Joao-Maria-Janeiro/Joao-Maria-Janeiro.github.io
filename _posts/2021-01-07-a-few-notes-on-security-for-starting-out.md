@@ -72,7 +72,7 @@ jdbcTemplate.update("UPDATE Users SET profile_id = 3 WHERE username = ?", userna
 So always used parameterized statements! They will prevent many attacks! If you only protect your application against one vulnerability this is probably the one!
 
 ## Error handling
-If an users tries to do something illegal or that gives an error it's important to decide what to show to the users, simply showing the error the database gives is a big security risk as you could be revealing information you shouldn't. Let's say an user was trying to login and inserts a correct username but a wrong password, it's important that you do not tell the user the username was correct but the password failed, you should just say something like 'username and password did not match', as you have probably noticed most services you use do. 
+If a users tries to do something illegal or that gives an error it's important to decide what to show to the users, simply showing the error the database gives is a big security risk as you could be revealing information you shouldn't. Let's say an user was trying to login and inserts a correct username but a wrong password, it's important that you do not tell the user the username was correct but the password failed, you should just say something like 'username and password did not match', as you have probably noticed most services you use do. 
 
 SQL could return a statement like this:
 
