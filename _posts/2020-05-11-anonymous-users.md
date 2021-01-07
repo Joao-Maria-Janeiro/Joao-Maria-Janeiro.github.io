@@ -2,8 +2,8 @@
 layout: post
 title: "Handling Anonymous Users"
 author: "João Maria Janeiro"
-categories: sample
-tags: [Web Dev]
+categories: posts
+tags: [web dev, web]
 image: users.png
 ---
 

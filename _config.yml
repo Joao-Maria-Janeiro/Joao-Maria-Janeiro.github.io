@@ -16,7 +16,14 @@ sass:
 # Customise atom feed settings (this is where Jekyll-Feed gets configuration information)
 title:		           "João Maria Janeiro"
 description:	       "Personal Website"
-author:              "João Maria Janeiro"
+author:
+  name: João Maria Janeiro
+  linkedin: joaomariajaneiro
+social:
+  name: João Maria Janeiro
+  links:
+    - https://github.com/Joao-Maria-Janeiro
+    - https://www.linkedin.com/in/joaomariajaneiro/
 
 # RSS 2.0 can be used instead of Atom by uncommenting following two lines
 #feed:

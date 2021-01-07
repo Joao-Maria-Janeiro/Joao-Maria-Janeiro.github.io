@@ -2,7 +2,7 @@
 layout: post
 title: "Extraction Summarizer"
 author: "João Maria Janeiro"
-categories: sample
+categories: posts
 tags: [Machine Learning]
 image: extraction.png
 ---

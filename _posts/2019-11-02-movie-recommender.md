@@ -2,7 +2,7 @@
 layout: post
 title: "Creating a movie recommender"
 author: "João Maria Janeiro"
-categories: sample
+categories: posts
 tags: [Machine Learning]
 image: movie-recommender.png
 ---
