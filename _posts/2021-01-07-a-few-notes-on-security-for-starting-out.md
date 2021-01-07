@@ -78,7 +78,7 @@ SQL could return a statement like this:
 
 ```sql
 -- SQL error
-Violation of PRIMARY KEY constraint ‘id′. Cannot insert duplicate key in object’ Users.id’. The duplicate key value is (2).
+Violation of PRIMARY KEY constraint 'id'. Cannot insert duplicate key in object 'Users.id'. The duplicate key value is (2).
 
 -- OR something like
 The UPDATE statement conflicted with the CHECK constraint "CK__Employee__Salary". The conflict occurred in database "StoreManagement", table "Employee", column 'Salary'.
