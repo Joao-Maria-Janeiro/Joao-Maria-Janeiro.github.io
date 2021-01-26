@@ -124,6 +124,8 @@ We have our 4x4 image and we will use a Pooling layer with size 2, so 2x2 filter
 
 For average pooling we have the 2x2 filter, we take regions of 4 pixels and average them out. In pooling the stride is usually the size of the filter, but you can change it and get different output sizes, like before.
 
+## Choosing the pooling layer
+Max Pooling is pretty much dominant these days since its a lot cheaper to compute with same or better performance as average pooling.
 
 # Flatten Layers
 This is the last type of layers in our CNN and they basically do what their name implies, they flatten the data, like so:
