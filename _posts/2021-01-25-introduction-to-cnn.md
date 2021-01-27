@@ -65,7 +65,7 @@ So that is what convolutional layers do, they figure out filters that will "stac
 ## Padding
 What about the corner of the images? Those only appear once in the convolution, how can we make them appear more and have more weight for other points as well? We can pad the image! 
 
-![image](https://media5.datahacker.rs/2018/11/sl_1.png)
+![image](https://editor.analyticsvidhya.com/uploads/99433dnn4.gif)
 
 This solves this issue!
 
