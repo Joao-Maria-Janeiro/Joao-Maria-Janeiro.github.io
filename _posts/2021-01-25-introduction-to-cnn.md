@@ -4,7 +4,7 @@ title: "Introduction to CNN"
 author: "João Maria Janeiro"
 categories: posts
 tags: [Machine Learning, Computer Vision, CNN, filters]
-image: security.jpeg
+image: leNet5.jpg
 ---
 
 
