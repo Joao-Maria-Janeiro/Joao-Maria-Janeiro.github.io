@@ -27,7 +27,7 @@ So you have just learned that we do a convolution of an image with a filter but 
 
 ![image](https://lh3.googleusercontent.com/proxy/GTWn3XU1VNDZL6xdmVRpdLPxW3mqvrEBlwXK8bb7UjnIhMi8zcbVNC5qzovoYESHJFIiO2eF06Z7rBd_NFkRdMcwKZSgzprwoUgXY0lJPXRhhEwKf6pcAJx1WOr71cqaJKMeeV3Cw_SSRHdDk2Pe06iDguM42f6pf-M)
 
-We can do various operations like apply a blur, shit the image and much more, I'll give some more examples but it's important to notice that we use the same 3x3 filter for the whole image, this is because these features can be repeated for whole image, we don't need filters that are very big. Let's look at this example, we want to classify an image as a geometric figure, so we need to detect its edges. We could for instance do something like this:
+We can do various operations like apply a blur, shift the image and much more, I'll give some more examples but it's important to notice that we use the same 3x3 filter for the whole image, this is because these features can be repeated for whole image, we don't need filters that are very big. Let's look at this example, we want to classify an image as a geometric figure, so we need to detect its edges. We could for instance do something like this:
 
 ![image](https://media5.datahacker.rs/2018/10/multiplication_slicice.png)
 
@@ -124,7 +124,7 @@ We have our 4x4 image and we will use a Pooling layer with size 2, so 2x2 filter
 
 For average pooling we have the 2x2 filter, we take regions of 4 pixels and average them out. In pooling the stride is usually the size of the filter, but you can change it and get different output sizes, like before.
 
-## Choosing the pooling layer
+## Choosing the pgistooling layer
 Max Pooling is pretty much dominant these days since its a lot cheaper to compute with same or better performance than average pooling.
 
 # Flatten Layers
