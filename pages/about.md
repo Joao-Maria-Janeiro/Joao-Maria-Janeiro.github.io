@@ -68,13 +68,19 @@ I've been fascinated by technology ever since I can remember and, due to that, I
               <span> Started college</span></li>
             <li>
               <time datetime="10:03">July 2018</time> 
-              <span> Internship at SAP Lisbon</span></li>
+              <span> Software Engineering Internship at SAP Lisbon</span></li>
             <li>
               <time datetime="10:03">July 2019</time> 
-              <span> Internship at Google New York, Ads team</span></li>
+              <span> Software Engineering Internship at Google New York, Ads team</span></li>
             <li>
               <time datetime="10:03">July 2020</time> 
-              <span> Internship at Google London (was recruited for Mountain View, Sillicon Valley but changed due to covid)</span></li>
+              <span> Software Engineering Internship at Google London, Ads team</span></li>
+            <li>
+              <time datetime="10:03">July 2021</time> 
+              <span> AI Research Internship at Unbabel Lisbon</span></li>
+            <li>
+              <time datetime="10:03">September 2022</time> 
+              <span> AI Research Internship at Meta Paris, FAIR</span></li>
             <!-- <li>
               <time datetime="10:03">10:03</time> 
               <span> On time</span></li>
