@@ -16,8 +16,8 @@ sass:
 # Customise atom feed settings (this is where Jekyll-Feed gets configuration information)
 title:		           "João Maria Janeiro"
 description:	       "Personal Website"
-author:
-  name: João Maria Janeiro
+author: João Maria Janeiro
+  #name: João Maria Janeiro
   #linkedin: joaomariajaneiro
 social:
   name: João Maria Janeiro
