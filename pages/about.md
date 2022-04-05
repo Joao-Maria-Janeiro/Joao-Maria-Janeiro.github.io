@@ -64,7 +64,7 @@ I've been fascinated by technology ever since I can remember and, due to that, I
         </style>
         <ul class="events">
             <li>
-              <time datetime="10:03">Sept 2017</time> 
+              <time datetime="10:03">Sep 2017</time> 
               <span> Started college</span></li>
             <li>
               <time datetime="10:03">July 2018</time> 
@@ -79,7 +79,7 @@ I've been fascinated by technology ever since I can remember and, due to that, I
               <time datetime="10:03">July 2021</time> 
               <span> AI Research Internship at Unbabel Lisbon</span></li>
             <li>
-              <time datetime="10:03">September 2022</time> 
+              <time datetime="10:03">Sep 2022</time> 
               <span> AI Research Internship at Meta Paris, FAIR</span></li>
             <!-- <li>
               <time datetime="10:03">10:03</time> 
