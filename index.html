@@ -104,6 +104,38 @@
             <div class="card mb-3 mx-auto p-2 border-light shadow-sm" style="max-width: 90%;">
                 <div class="row g-0">
                     <div class="col-md-4 d-flex align-items-center">
+                    <img src="fig/MEXMA.drawio.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                            <div class="row">
+                                <div class="col-10">
+                                    <a href="https://arxiv.org/abs/2409.12737">MEXMA: Token-level objectives improve sentence representations</a>
+                                </div>
+                                <div class="col-2">
+                                    <span class="d-flex justify-content-end" style="font-weight: lighter; font-size: 16px;">Sep 24</span>
+                                </div>
+                            </div>
+                            </h5>
+                            <a class="card-text"><small class="text-body-secondary"> <a style="text-decoration: underline;">João Maria Janeiro,</a> Benjamin Piwowarski, Patrick Gallinari, Loïc Barrault</small></a>
+                            <br>
+                            <a class="card-text" style="text-decoration:none; font-style: italic;">
+                            <small class="text-body-secondary">arxiv</small>
+                            </a>
+                            <br>
+                            <button type="button" data-bs-toggle="collapse" data-bs-target="#2_abstract" aria-expanded="false" aria-controls="2_abstract" style="color: black; font-size: 8px; border: none; cursor: pointer; appearance: none; background-color: inherit; ; text-align: start;">
+                                <a style="font-weight: lighter; font-size: 10px; text-align: start;">TL;DR: Novel sota method for creating aligned sentence representations across languages, that also performs better on downstream tasks, by using both token level and sentence level objectives..</a>
+                                <img src="fig/down.png" style="height: 12px;" alt="">
+                            </button>
+                            <p id="2_abstract" class="collapse card-text" style="font-size: 12px; font-weight: lighter;">Current pre-trained cross-lingual sentence encoders approaches use sentence-level objectives only. This can lead to loss of information, especially for tokens, which then degrades the sentence representation. We propose MEXMA, a novel approach that integrates both sentence-level and token-level objectives. The sentence representation in one language is used to predict masked tokens in another language, with both the sentence representation and all tokens directly updating the encoder. We show that adding token-level objectives greatly improves the sentence representation quality across several tasks. Our approach outperforms current pre-trained cross-lingual sentence encoders on bi-text mining as well as several downstream tasks. We also analyse the information encoded in our tokens, and how the sentence representation is built from them.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3 mx-auto p-2 border-light shadow-sm" style="max-width: 90%;">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center">
                     <img src="fig/paper.png" class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8">
@@ -271,7 +303,7 @@
                 <span class="badge rounded-pill text-dark" style="background-color: rgb(229,231,235); font-weight: normal;">&nbsp;&nbsp;Hobbies&nbsp;&nbsp;</span>
             </div>
             <br>
-            <div class="mx-auto p-2" style="width: 1200px;">
+            <div class="mx-auto p-2" >
                 <div class="row align-items-center">
                     <div class="col-1">
                         <img src="fig/kart.png" alt="karting icon" style="width: 30px;">
@@ -315,13 +347,25 @@
                 <span>What's next? Feel free to reach out to me if you want to collaborate, or if you have any query about my research!</span>
             </div>
             <br>
-            <div class="mx-auto p-2" style="width: 33%;">
+
+            <!-- Computer -->
+            <div class="mx-auto p-2 d-none d-md-block" style="width: 33%;">
                 <i class="fa fa-envelope-o" style="font-size:24px"></i>
                 &nbsp;&nbsp;&nbsp;
                 <a style="font-weight: bold; font-size: 20pt;">joaojaneiro@meta.com</a>
                 &nbsp;&nbsp;&nbsp;
                 <button onclick="copyText()" style="background-color: white; border: 0px solid white;"><i class="fa fa-copy"></i></button>
             </div>
+            <!-- Phone -->
+            <div class="mx-auto p-2 d-block d-md-none">
+                <i class="fa fa-envelope-o" style="font-size:24px"></i>
+                &nbsp;&nbsp;&nbsp;
+                <a style="font-weight: bold; font-size: 20pt;">joaojaneiro@meta.com</a>
+                &nbsp;&nbsp;&nbsp;
+                <button onclick="copyText()" style="background-color: white; border: 0px solid white;"><i class="fa fa-copy"></i></button>
+            </div>
+
+
             <br><br>
             <div class="mx-auto p-2" style="width: 30%;">
                 <span>You may also find me on these platforms!</span>
