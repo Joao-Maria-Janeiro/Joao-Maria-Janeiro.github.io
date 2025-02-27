@@ -104,6 +104,46 @@
             <div class="card mb-3 mx-auto p-2 border-light shadow-sm" style="max-width: 90%;">
                 <div class="row g-0">
                     <div class="col-md-4 d-flex align-items-center">
+                        <img src="fig/lcm.png" style="width: 75%;" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                            <div class="row">
+                                <div class="col-10">
+                                    <a href="https://arxiv.org/abs/2412.08821">Large Concept Models: Language Modeling in a Sentence Representation Space</a>
+                                </div>
+                                <div class="col-2">
+                                    <span class="d-flex justify-content-end" style="font-weight: lighter; font-size: 16px;">Dec 24</span>
+                                </div>
+                            </div>
+                            </h5>
+                            <a class="card-text">
+                                <small class="text-body-secondary">
+                                    <a style="text-decoration: none;">
+                                        The LCM Team, Loïc Barrault, Paul-Ambroise Duquenne, Maha Elbayad, Artyom Kozhevnikov, Belen Alastruey, Pierre Andrews, Mariano Coria, Guillaume Couairon, Marta R Costa-jussà, David Dale, Hady Elsahar, Kevin Heffernan, 
+                                    </a>
+                                    <a style="text-decoration: underline;">João Maria Janeiro</a>, 
+                                    Tuan Tran, Christophe Ropers, Eduardo Sánchez, Robin San Roman, Alexandre Mourachko, Safiyyah Saleem, Holger Schwenk
+                                </small>
+                            </a>
+                            <br>
+                            <a class="card-text" style="text-decoration:none; font-style: italic;">
+                                <small class="text-body-secondary">arxiv</small>
+                            </a>
+                            <br>
+                            <button type="button" data-bs-toggle="collapse" data-bs-target="#3_abstract" aria-expanded="false" aria-controls="3_abstract" style="color: black; font-size: 8px; border: none; cursor: pointer; appearance: none; background-color: inherit; ; text-align: start;">
+                                <a style="font-weight: lighter; font-size: 10px; text-align: start;">TL;DR: Replace the pre-training of transformer LLMs from token-level to an abstract latent space representation objective.</a>
+                                <img src="fig/down.png" style="height: 12px;" alt="">
+                            </button>
+                            <p id="3_abstract" class="collapse card-text" style="font-size: 12px; font-weight: lighter;">LLMs have revolutionized the field of artificial intelligence and have emerged as the de-facto tool for many tasks. The current established technology of LLMs is to process input and generate output at the token level. This is in sharp contrast to humans who operate at multiple levels of abstraction, well beyond single words, to analyze information and to generate creative content. In this paper, we present an attempt at an architecture which operates on an explicit higher-level semantic representation, which we name a concept. Concepts are language- and modality-agnostic and represent a higher level idea or action in a flow. Hence, we build a "Large Concept Model". In this study, as proof of feasibility, we assume that a concept corresponds to a sentence, and use an existing sentence embedding space, SONAR, which supports up to 200 languages in both text and speech modalities. The Large Concept Model is trained to perform autoregressive sentence prediction in an embedding space. We explore multiple approaches, namely MSE regression, variants of diffusion-based generation, and models operating in a quantized SONAR space. These explorations are performed using 1.6B parameter models and training data in the order of 1.3T tokens. We then scale one architecture to a model size of 7B parameters and training data of about 2.7T tokens. We perform an experimental evaluation on several generative tasks, namely summarization and a new task of summary expansion. Finally, we show that our model exhibits impressive zero-shot generalization performance to many languages, outperforming existing LLMs of the same size. The training code of our models is freely available.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3 mx-auto p-2 border-light shadow-sm" style="max-width: 90%;">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center">
                     <img src="fig/MEXMA.drawio.png" class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8">
